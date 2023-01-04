@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "src/api/index.ts",
   "type": "module",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "dev": "npx nodemon",
     "build": "rimraf ./build && npx tsc",
