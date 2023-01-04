@@ -19,6 +19,14 @@ class CharacterController {
       res.json({ error: e });
     }
   }
+
+  async get(req: Request, res: Response) {
+    try {
+      res.json('Characters is empty');
+    } catch (e) {
+      res.json({ error: e });
+    }
+  }
 }
 
 export default new CharacterController();
