@@ -6,12 +6,17 @@
   "engines": {
     "node": "18.x"
   },
+  "pre-commit": [
+    "ts.check",
+    "build",
+    "add-build"
+  ],
   "scripts": {
-    "dev": "npx nodemon",
-    "build": "rimraf ./build && npx tsc",
-    "start": "npm run build && node build/api/index.js",
-    "lint": "npx eslint ./src",
-    "format": "npx eslint ./src --fix"
+    "start": "nodemon src/api/index.ts",
+    "build": "rimraf dist/api && tsc",
+    "ts.check": "tsc --project tsconfig.json",
+    "add-build": "git add dist/api",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -27,6 +32,7 @@
     "@typescript-eslint/parser": "^5.48.0",
     "eslint": "^8.31.0",
     "nodemon": "^2.0.20",
+    "pre-commit": "^1.2.2",
     "prettier": "2.8.1",
     "rimraf": "^3.0.2",
     "sequelize-cli": "^6.5.2",
