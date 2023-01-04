@@ -6,11 +6,6 @@
   "engines": {
     "node": "18.x"
   },
-  "pre-commit": [
-    "ts.check",
-    "build",
-    "add-build"
-  ],
   "scripts": {
     "start": "nodemon src/index.ts",
     "build": "rimraf dist && tsc",
@@ -18,6 +13,11 @@
     "add-build": "git add dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "pre-commit": [
+    "ts.check",
+    "build",
+    "add-build"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
