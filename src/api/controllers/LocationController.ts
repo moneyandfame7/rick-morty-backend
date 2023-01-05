@@ -15,6 +15,10 @@ class LocationController {
       res.json({ error: e });
     }
   }
+
+  get(req: Request, res: Response) {
+    res.send({ message: 'Empty' });
+  }
 }
 
 export default new LocationController();
