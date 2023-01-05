@@ -2,6 +2,8 @@
 import { DataTypes } from 'sequelize';
 import db from './index.js';
 import { Character } from '../../types/character.js';
+import EpisodeCharacter from './episodecharacter.js';
+import Episode from './episode.js';
 
 const Character = db.define<Character>(
   'Character',
@@ -47,3 +49,6 @@ const Character = db.define<Character>(
   },
   {}
 );
+Character.belongsToMany(Episode, { through: EpisodeCharacter });
+
+export default Character;

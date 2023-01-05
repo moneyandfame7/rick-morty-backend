@@ -1,39 +1,23 @@
 'use strict';
 import { DataTypes } from 'sequelize';
+import Character from './character.js';
 import db from './index.js';
 import EpisodeCharacter from './episodecharacter.js';
-import Episode from './episode.js';
-const Character = db.define('Character', {
+const Episode = db.define('Episode', {
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         autoIncrement: false,
     },
-    status: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
     name: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    species: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    gender: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    type: {
+    episode: {
         type: DataTypes.STRING,
         allowNull: false,
     },
     url: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    image: {
         type: DataTypes.STRING,
         allowNull: false,
     },
@@ -43,6 +27,6 @@ const Character = db.define('Character', {
         defaultValue: new Date(),
     },
 }, {});
-Character.belongsToMany(Episode, { through: EpisodeCharacter });
-export default Character;
-//# sourceMappingURL=character.js.map
+Episode.belongsToMany(Character, { through: EpisodeCharacter });
+export default Episode;
+//# sourceMappingURL=episode.js.map
