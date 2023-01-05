@@ -10,6 +10,7 @@ const config: Options = configDB[env as keyof typeof configDB];
 
 const db: Sequelize = new Sequelize(config.database!, config.username!, config.password, {
   dialectModule: pg,
+  dialect: 'postgres',
 });
 
 export default db;
