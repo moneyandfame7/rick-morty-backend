@@ -29,4 +29,3 @@ class CharacterController {
 }
 const characterController = new CharacterController();
 export { characterController };
-//# sourceMappingURL=CharacterController.js.map
