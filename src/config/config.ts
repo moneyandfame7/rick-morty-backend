@@ -43,10 +43,11 @@ const configDB: IConfigTs = {
     },
   },
   production: {
-    username: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    host: process.env.DB_HOST,
+    username: 'postgres',
+    password: '9w5K1y6toGC4Ypi0QVdP',
+    database: 'railway',
+    host: 'containers-us-west-43.railway.app',
+    port: 6298,
     dialect: 'postgres',
     dialectOptions: {
       charset: 'utf8',
