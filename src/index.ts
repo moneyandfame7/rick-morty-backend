@@ -1,7 +1,6 @@
 import express, { ErrorRequestHandler, Express } from 'express';
 import cors from 'cors';
 import 'dotenv/config';
-import * as pg from 'pg';
 import fileUpload from 'express-fileupload';
 import router from './api/routers/index.js';
 import characterRouter from './api/routers/character.router.js';
