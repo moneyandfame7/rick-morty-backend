@@ -15,7 +15,7 @@
     "sourceMap": true,
     "outDir": "./dist",
     "rootDir": "./",
-    "typeRoots": ["./src/types"],
+    "typeRoots": ["./types"],
     "removeComments": true,
     "baseUrl": ".",
     "paths": {

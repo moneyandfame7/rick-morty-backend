@@ -22,8 +22,9 @@ app.use('/api', locationRouter);
 app.use(<ErrorRequestHandler>((err, req, res, next) => {
   return res.send({ message: err });
 }));
-// db.sequelize.sync().then(() => {
-app.listen(port, () => {
-  console.log(`Example app listening on port  ${port}`);
+
+db.sync().then(() => {
+  app.listen(port, () => {
+    console.log(`Example app listening on port  ${port}`);
+  });
 });
-// });

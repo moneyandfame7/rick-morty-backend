@@ -14,6 +14,7 @@ const configDB = {
         define: {
             timestamps: false,
         },
+        logging: false,
     },
     test: {
         username: process.env.DB_USER,
