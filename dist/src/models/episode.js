@@ -26,7 +26,9 @@ const Episode = db.define('Episode', {
         allowNull: false,
         defaultValue: new Date(),
     },
-}, {});
+}, {
+    tableName: 'Episode',
+    modelName: 'Episode',
+});
 Episode.belongsToMany(Character, { through: EpisodeCharacter });
 export default Episode;
-//# sourceMappingURL=episode.js.map

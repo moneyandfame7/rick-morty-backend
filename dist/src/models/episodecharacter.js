@@ -1,9 +1,7 @@
 'use strict';
 import { DataTypes } from 'sequelize';
 import db from './index.js';
-import Character from '../models/character.js';
-import Episode from './episode.js';
-const EpisodeCharacter = db.define('Character', {
+const EpisodeCharacter = db.define('EpisodeCharacter', {
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -13,17 +11,18 @@ const EpisodeCharacter = db.define('Character', {
     character_id: {
         type: DataTypes.INTEGER,
         references: {
-            model: Character.tableName,
+            model: 'Character',
             key: 'id',
         },
     },
     episode_id: {
         type: DataTypes.INTEGER,
         references: {
-            model: Episode.tableName,
+            model: 'Episode',
             key: 'id',
         },
     },
-}, {});
+}, {
+    tableName: 'EpisodeCharacters',
+});
 export default EpisodeCharacter;
-//# sourceMappingURL=episodecharacter.js.map

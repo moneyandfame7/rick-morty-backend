@@ -3,28 +3,19 @@
     "target": "es2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "lib": ["ES6"],
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "noImplicitAny": true,
-    "skipLibCheck": true,
-    "allowJs": true,
-    "sourceMap": true,
+    // "sourceMap": true,
     "outDir": "./dist",
     "rootDir": "./",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "skipLibCheck": true,
     "typeRoots": ["./types"],
-    "removeComments": true,
-    "baseUrl": ".",
-    "paths": {
-      "*": ["node_modules/*", "src/types/*"]
-    }
+    "suppressImplicitAnyIndexErrors": true
+    // "strictPropertyInitialization": false
+    // "strictNullChecks": false,
   },
-  "include": ["./src/**/*"],
-  "lib": ["esnext"],
-  "ts-node": {
-    "esm": true
-  }
+  "exclude": ["node_modules"],
+  "include": ["src"]
 }

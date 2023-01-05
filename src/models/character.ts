@@ -47,7 +47,10 @@ const Character = db.define<Character>(
       defaultValue: new Date(),
     },
   },
-  {}
+  {
+    tableName: 'Characters',
+    modelName: 'Character',
+  }
 );
 Character.belongsToMany(Episode, { through: EpisodeCharacter });
 

@@ -6,5 +6,5 @@ import { ResourceBases } from './bases.js';
 export interface Location extends Model<InferAttributes<Location>, InferCreationAttributes<Location>>, ResourceBases {
   type: string;
   dimension: string;
-  // residents: // тут повинні бути посилання на персонажів
+  // residents: // TODO тут повинні бути посилання на персонажів
 }

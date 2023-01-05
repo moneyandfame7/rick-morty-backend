@@ -1,9 +1,14 @@
 'use strict';
+/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-    async up(queryInterface, Sequelize) {
-    },
-    async down(queryInterface, Sequelize) {
-    }
+    up: async (queryInterface) => await queryInterface.bulkInsert('Characters', [
+        {
+            name: 'John Doe',
+            isBetaMember: false,
+        },
+    ], {}),
+    // down: async (queryInterface: QueryInterface) => {
+    //   await queryInterface.bulkDelete('Characters', null, {});
+    // },
 };
 export {};
-//# sourceMappingURL=20230105133742-fill-character.js.map

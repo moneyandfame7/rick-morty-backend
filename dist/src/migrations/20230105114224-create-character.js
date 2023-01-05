@@ -1,50 +1,58 @@
-'use strict';
+import { DataTypes } from 'sequelize';
 module.exports = {
-    async up(queryInterface, Sequelize) {
-        await queryInterface.createTable('Characters', {
+    up: async (queryInterface) => await queryInterface.sequelize.transaction(async (transaction) => {
+        return await queryInterface.createTable('Characters', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
-                type: Sequelize.INTEGER
+                type: DataTypes.INTEGER,
             },
             name: {
-                type: Sequelize.STRING
+                type: DataTypes.STRING,
+                allowNull: false,
             },
             status: {
-                type: Sequelize.STRING
+                type: DataTypes.STRING,
+                allowNull: false,
             },
-            speceis: {
-                type: Sequelize.STRING
+            species: {
+                type: DataTypes.STRING,
+                allowNull: false,
             },
             type: {
-                type: Sequelize.STRING
+                type: DataTypes.STRING,
+                allowNull: false,
             },
             origin: {
-                type: Sequelize.STRING
+                type: DataTypes.STRING,
+                allowNull: false,
             },
             episode: {
-                type: Sequelize.STRING
+                type: DataTypes.STRING,
+                allowNull: false,
             },
             url: {
-                type: Sequelize.STRING
+                type: DataTypes.STRING,
+                allowNull: false,
             },
             image: {
-                type: Sequelize.STRING
+                type: DataTypes.STRING,
+                allowNull: false,
             },
             createdAt: {
                 allowNull: false,
-                type: Sequelize.DATE
+                type: DataTypes.DATE,
             },
             updatedAt: {
                 allowNull: false,
-                type: Sequelize.DATE
-            }
+                type: DataTypes.DATE,
+            },
+        }, { transaction });
+    }),
+    down: async (queryInterface) => await queryInterface.sequelize.transaction(async (transaction) => {
+        return await queryInterface.dropTable('Characters', {
+            transaction,
         });
-    },
-    async down(queryInterface, Sequelize) {
-        await queryInterface.dropTable('Characters');
-    }
+    }),
 };
-export {};
-//# sourceMappingURL=20230105114224-create-character.js.map

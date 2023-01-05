@@ -1,7 +1,7 @@
 import { InferAttributes, InferCreationAttributes, Model, NonAttribute } from 'sequelize';
 import { Episode } from './episode.js';
 import { ResourceBases } from './bases.js';
-
+// TODO : ...
 export interface Character
   extends Model<InferAttributes<Character>, InferCreationAttributes<Character>>,
     ResourceBases {

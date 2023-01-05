@@ -1,9 +1,8 @@
 'use strict';
 import { DataTypes } from 'sequelize';
-import Episode from '../models/episode.js';
 module.exports = {
     up: async (queryInterface) => await queryInterface.sequelize.transaction(async (transaction) => {
-        return await queryInterface.createTable(Episode.tableName, {
+        return await queryInterface.createTable('Episodes', {
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -31,9 +30,8 @@ module.exports = {
         });
     }),
     down: async (queryInterface) => await queryInterface.sequelize.transaction(async (transaction) => {
-        return await queryInterface.dropTable(Episode.tableName, {
+        return await queryInterface.dropTable('Episodes', {
             transaction,
         });
     }),
 };
-//# sourceMappingURL=20230105125337-create-episode.js.map

@@ -8,4 +8,3 @@ router.get('/', (_req, res) => {
     });
 });
 export default router;
-//# sourceMappingURL=index.js.map
