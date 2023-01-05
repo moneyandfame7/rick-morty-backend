@@ -15,3 +15,4 @@ class EpisodeController {
     }
 }
 export default new EpisodeController();
+//# sourceMappingURL=EpisodeController.js.map

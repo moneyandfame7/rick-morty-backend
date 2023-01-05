@@ -15,3 +15,4 @@ class LocationController {
     }
 }
 export default new LocationController();
+//# sourceMappingURL=LocationController.js.map

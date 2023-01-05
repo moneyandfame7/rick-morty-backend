@@ -24,3 +24,4 @@ db.sync().then(() => {
         console.log(`Example app listening on port  ${port}`);
     });
 });
+//# sourceMappingURL=index.js.map

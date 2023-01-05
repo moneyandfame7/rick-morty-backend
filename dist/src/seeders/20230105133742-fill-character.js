@@ -1,5 +1,4 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
     up: async (queryInterface) => await queryInterface.bulkInsert('Characters', [
         {
@@ -7,8 +6,6 @@ module.exports = {
             isBetaMember: false,
         },
     ], {}),
-    // down: async (queryInterface: QueryInterface) => {
-    //   await queryInterface.bulkDelete('Characters', null, {});
-    // },
 };
 export {};
+//# sourceMappingURL=20230105133742-fill-character.js.map

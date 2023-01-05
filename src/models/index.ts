@@ -1,4 +1,3 @@
-require('pg');
 import { Sequelize } from 'sequelize';
 import { Options } from 'sequelize';
 import configDB from './../config/config.js';

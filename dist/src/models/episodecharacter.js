@@ -26,3 +26,4 @@ const EpisodeCharacter = db.define('EpisodeCharacter', {
     tableName: 'EpisodeCharacters',
 });
 export default EpisodeCharacter;
+//# sourceMappingURL=episodecharacter.js.map

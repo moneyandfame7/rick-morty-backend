@@ -48,3 +48,4 @@ const Character = db.define('Character', {
 });
 Character.belongsToMany(Episode, { through: EpisodeCharacter });
 export default Character;
+//# sourceMappingURL=character.js.map

@@ -1,6 +1,5 @@
 'use strict';
 import { DataTypes } from 'sequelize';
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
     up: async (queryInterface) => await queryInterface.sequelize.transaction(async (transaction) => {
         return await queryInterface.createTable('EpisodeCharacter', {
@@ -27,3 +26,4 @@ module.exports = {
         });
     }),
 };
+//# sourceMappingURL=20230105132125-create-episode-character.js.map
