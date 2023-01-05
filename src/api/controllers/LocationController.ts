@@ -17,7 +17,7 @@ class LocationController {
   }
 
   get(req: Request, res: Response) {
-    res.send({ message: 'Empty' });
+    res.send({ message: 'Emptyy-y-y-y--y-y' });
   }
 }
 
