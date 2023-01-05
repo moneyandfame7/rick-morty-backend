@@ -29,4 +29,6 @@ class CharacterController {
   }
 }
 
-export default new CharacterController();
+const characterController = new CharacterController();
+
+export { characterController };
