@@ -2,14 +2,15 @@ import express, { ErrorRequestHandler, Express, Request, Response } from 'expres
 import cors from 'cors';
 import 'dotenv/config';
 import fileUpload from 'express-fileupload';
-import router from './routers/index.js';
-import characterRouter from './routers/character.router.js';
-import episodeRouter from './routers/episode.router.js';
-import locationRouter from './routers/location.router.js';
+import router from './routers/main-router.js';
+import characterRouter from './routers/character-router.js';
+import episodeRouter from './routers/episode-router.js';
+import locationRouter from './routers/location-router.js';
 import db from '../database/models/index.js';
 import characterDbController from '../database/controllers/character-controller.js';
 import episodeDbController from '../database/controllers/episode-controller.js';
 import { characters, episodes } from '../temp-data/index.js';
+import { fetchData } from '../utils/fetch-data.js';
 
 const app: Express = express();
 const port = process.env.PORT || 1337;
@@ -67,6 +68,11 @@ app.use('/_characters', async (req: Request, res: Response) => {
 
   res.send(_characters);
 });
+app.use('/test', async (req: Request, res: Response) => {
+  const data = await fetchData('https://rickandmortyapi.com/api/episode');
+  res.send(data);
+});
+
 db.sync({ force: true }).then(() => {
   console.log('Drop and re-sync db.');
   app.listen(port, () => {

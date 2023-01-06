@@ -2,7 +2,7 @@
 
 import { QueryInterface } from 'sequelize';
 import { CreationAttributes } from 'sequelize/types/index.js';
-import { Character as CharacterType } from 'character.js';
+import { Character as CharacterType } from '../../types/character.js';
 import Character from '../models/character.js';
 
 /** @type {import('sequelize-cli').Migration} */

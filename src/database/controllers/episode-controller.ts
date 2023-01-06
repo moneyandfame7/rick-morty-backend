@@ -1,5 +1,5 @@
 import { CreationAttributes } from 'sequelize/types/index.js';
-import { Episode as EpisodeType } from 'episode.js';
+import { Episode as EpisodeType } from '../../types/episode.js';
 import Episode from '../models/episode.js';
 import Character from '../models/character.js';
 
