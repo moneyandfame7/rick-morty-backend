@@ -1,4 +1,5 @@
 import { CreationOptional } from 'sequelize/types/index.js';
+
 /**
  * Містить в собі поля, які є у всіх моделей
  * - id
@@ -14,8 +15,8 @@ import { CreationOptional } from 'sequelize/types/index.js';
  *  })
  * */
 export interface ResourceBases {
-  id: CreationOptional<number>;
-  created_at: CreationOptional<Date>;
-  name: string;
-  url: string;
+  readonly id: CreationOptional<number>;
+  readonly created_at: CreationOptional<Date>;
+  readonly name: string;
+  readonly url: string;
 }

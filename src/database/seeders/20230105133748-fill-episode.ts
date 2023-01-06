@@ -2,14 +2,16 @@
 
 import { QueryInterface } from 'sequelize';
 import { CreationAttributes } from 'sequelize/types/index.js';
-import { Episode as EpisodeType } from 'episode.js';
+import { Episode as EpisodeType } from '../../types/episode.js';
 import Episode from '../models/episode.js';
+import { fetchData } from '../../utils/fetch-data.js';
 
-/** @type {import('sequelize-cli').Migration} */
 export default {
   up: async (queryInterface: QueryInterface): Promise<void> =>
     await queryInterface.sequelize.transaction(async (transaction) => {
       try {
+        const responseEpisode = await fetchData('https://rickandmortyapi.com/api/episode');
+
         const episodesObj: CreationAttributes<EpisodeType>[] = [
           {
             name: 'Rick Potion #9',
@@ -43,6 +45,8 @@ export default {
         ];
 
         const episodes: EpisodeType[] = await Episode.bulkCreate<EpisodeType>(episodesObj, { transaction });
+
+        // потім запіхнути episodes к characters
       } catch (e) {
         console.log(e);
       }

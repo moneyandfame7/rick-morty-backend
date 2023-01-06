@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "@babel/register": "^7.18.9",
+    "axios": "^1.2.2",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
     "concurrently": "^7.6.0",

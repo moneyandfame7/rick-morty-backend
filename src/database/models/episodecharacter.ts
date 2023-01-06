@@ -1,7 +1,7 @@
 'use strict';
 import { DataTypes } from 'sequelize';
 import db from './index.js';
-import { EpisodeCharacter } from 'episode-character.js';
+import { EpisodeCharacter } from '../../types/episode-character.js';
 
 const EpisodeCharacter = db.define<EpisodeCharacter>(
   'EpisodeCharacter',

@@ -1,6 +1,6 @@
 'use strict';
 import { DataTypes, QueryInterface } from 'sequelize';
-import { Episode as EpisodeType } from 'episode.js';
+import { Episode as EpisodeType } from '../../types/episode.js';
 import Episode from '../models/episode.js';
 
 module.exports = {
