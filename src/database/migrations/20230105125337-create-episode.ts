@@ -1,25 +1,39 @@
 'use strict';
 import { DataTypes, QueryInterface } from 'sequelize';
-import { EpisodeCharacter as EpisodeCharacterType } from '../../types/episode-character.js';
-/** @type {import('sequelize-cli').Migration} */
+import { Episode as EpisodeType } from 'episode.js';
+import Episode from '../models/episode.js';
+
 module.exports = {
   up: async (queryInterface: QueryInterface): Promise<void> =>
     await queryInterface.sequelize.transaction(async (transaction) => {
-      return await queryInterface.createTable<EpisodeCharacterType>(
-        'EpisodeCharacter',
+      return await queryInterface.createTable<EpisodeType>(
+        Episode.tableName,
         {
           id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             autoIncrement: false,
           },
-          character_id: {
-            type: DataTypes.INTEGER,
+          name: {
+            type: DataTypes.STRING,
             allowNull: false,
           },
-          episode_id: {
-            type: DataTypes.INTEGER,
+          episode: {
+            type: DataTypes.STRING,
             allowNull: false,
+          },
+          url: {
+            type: DataTypes.STRING,
+            allowNull: false,
+          },
+          air_date: {
+            type: DataTypes.STRING,
+            allowNull: false,
+          },
+          created_at: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: new Date(),
           },
         },
         {
@@ -27,10 +41,9 @@ module.exports = {
         }
       );
     }),
-
   down: async (queryInterface: QueryInterface): Promise<void> =>
     await queryInterface.sequelize.transaction(async (transaction) => {
-      return await queryInterface.dropTable('EpisodeCharacter', {
+      return await queryInterface.dropTable(Episode.tableName, {
         transaction,
       });
     }),
