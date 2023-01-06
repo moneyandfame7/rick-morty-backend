@@ -1,10 +1,12 @@
 import { DataTypes, QueryInterface } from 'sequelize';
+import Character from '../models/character.js';
+import { Character as CharacterType } from '../../types/character.js';
 
 module.exports = {
   up: async (queryInterface: QueryInterface): Promise<void> =>
     await queryInterface.sequelize.transaction(async (transaction) => {
-      return await queryInterface.createTable(
-        'Characters',
+      return await queryInterface.createTable<CharacterType>(
+        Character.tableName,
         {
           id: {
             allowNull: false,
@@ -28,11 +30,7 @@ module.exports = {
             type: DataTypes.STRING,
             allowNull: false,
           },
-          origin: {
-            type: DataTypes.STRING,
-            allowNull: false,
-          },
-          episode: {
+          gender: {
             type: DataTypes.STRING,
             allowNull: false,
           },
@@ -44,13 +42,10 @@ module.exports = {
             type: DataTypes.STRING,
             allowNull: false,
           },
-          createdAt: {
+          created_at: {
+            type: DataTypes.STRING,
             allowNull: false,
-            type: DataTypes.DATE,
-          },
-          updatedAt: {
-            allowNull: false,
-            type: DataTypes.DATE,
+            defaultValue: new Date(),
           },
         },
         { transaction }
@@ -59,7 +54,7 @@ module.exports = {
 
   down: async (queryInterface: QueryInterface): Promise<void> =>
     await queryInterface.sequelize.transaction(async (transaction) => {
-      return await queryInterface.dropTable('Characters', {
+      return await queryInterface.dropTable(Character.tableName, {
         transaction,
       });
     }),

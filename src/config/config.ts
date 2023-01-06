@@ -13,13 +13,14 @@ const configDB: IConfigTs = {
   development: {
     username: 'postgres',
     password: 'root',
-    database: 'test',
+    database: 'rick-morty',
     host: 'localhost',
     port: 5432,
-    // username: process.env.DB_USER,
-    // password: process.env.DB_PASSWORD,
-    // database: process.env.DB_NAME,
-    // host: process.env.DB_HOST,
+    // username: 'postgres',
+    // password: 'WeOfaeYfp6AfcGmILvV8',
+    // database: 'railway',
+    // host: 'containers-us-west-76.railway.app',
+    // port: 6954,
     dialect: 'postgres',
     dialectOptions: {
       charset: 'utf8',
@@ -44,10 +45,10 @@ const configDB: IConfigTs = {
   },
   production: {
     username: 'postgres',
-    password: '9w5K1y6toGC4Ypi0QVdP',
+    password: 'WeOfaeYfp6AfcGmILvV8',
     database: 'railway',
-    host: 'containers-us-west-43.railway.app',
-    port: 6298,
+    host: 'containers-us-west-76.railway.app',
+    port: 6954,
     dialect: 'postgres',
     dialectOptions: {
       charset: 'utf8',

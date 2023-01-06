@@ -16,6 +16,7 @@
     "migrate-undo": "npx sequelize-cli db:migrate:undo:all",
     "migrate": "npx sequelize-cli db:migrate",
     "migrate-status": "npx sequelize-cli db:migrate:status",
+    "seed": "npx sequelize-cli db:seed:all",
     "add-build": "git add dist",
     "lint": "eslint --ignore-path .eslintignore --ext .js,.ts .",
     "test": "echo \"Error: no test specified\" && exit 1"

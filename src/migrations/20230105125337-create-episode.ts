@@ -1,12 +1,13 @@
 'use strict';
 import { DataTypes, QueryInterface } from 'sequelize';
 import { Episode as EpisodeType } from '../../types/episode.js';
+import Episode from '../models/episode.js';
 
 module.exports = {
   up: async (queryInterface: QueryInterface): Promise<void> =>
     await queryInterface.sequelize.transaction(async (transaction) => {
       return await queryInterface.createTable<EpisodeType>(
-        'Episodes',
+        Episode.tableName,
         {
           id: {
             type: DataTypes.INTEGER,
@@ -25,6 +26,10 @@ module.exports = {
             type: DataTypes.STRING,
             allowNull: false,
           },
+          air_date: {
+            type: DataTypes.STRING,
+            allowNull: false,
+          },
           created_at: {
             type: DataTypes.DATE,
             allowNull: false,
@@ -38,7 +43,7 @@ module.exports = {
     }),
   down: async (queryInterface: QueryInterface): Promise<void> =>
     await queryInterface.sequelize.transaction(async (transaction) => {
-      return await queryInterface.dropTable('Episodes', {
+      return await queryInterface.dropTable(Episode.tableName, {
         transaction,
       });
     }),

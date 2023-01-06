@@ -2,8 +2,8 @@
 import { DataTypes } from 'sequelize';
 import db from './index.js';
 import { Character } from '../../types/character.js';
-import EpisodeCharacter from './episodecharacter.js';
 import Episode from './episode.js';
+import EpisodeCharacter from './episodecharacter.js';
 
 const Character = db.define<Character>(
   'Character',
@@ -11,7 +11,8 @@ const Character = db.define<Character>(
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      autoIncrement: false,
+      autoIncrement: true,
+      primaryKey: true,
     },
     status: {
       type: DataTypes.STRING,
@@ -47,11 +48,20 @@ const Character = db.define<Character>(
       defaultValue: new Date(),
     },
   },
-  {
-    tableName: 'Characters',
-    modelName: 'Character',
-  }
+  { timestamps: false }
 );
-Character.belongsToMany(Episode, { through: EpisodeCharacter });
+
+/*
+!якщо використовуємо додаткові поля в проміжній таблиці,
+! ( наприклад created_at ) потрібно передати всю модель,
+! а не просто Model.tableName
+*/
+Character.belongsToMany(Episode, {
+  through: EpisodeCharacter,
+});
+
+Episode.belongsToMany(Character, {
+  through: EpisodeCharacter,
+});
 
 export default Character;

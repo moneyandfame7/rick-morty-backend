@@ -1,9 +1,7 @@
 'use strict';
 import { DataTypes } from 'sequelize';
 import { Episode } from '../../types/episode.js';
-import Character from './character.js';
 import db from './index.js';
-import EpisodeCharacter from './episodecharacter.js';
 
 const Episode = db.define<Episode>(
   'Episode',
@@ -11,7 +9,8 @@ const Episode = db.define<Episode>(
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      autoIncrement: false,
+      autoIncrement: true,
+      primaryKey: true,
     },
     name: {
       type: DataTypes.STRING,
@@ -25,6 +24,10 @@ const Episode = db.define<Episode>(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    air_date: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     created_at: {
       type: DataTypes.DATE,
       allowNull: false,
@@ -32,10 +35,7 @@ const Episode = db.define<Episode>(
     },
   },
   {
-    tableName: 'Episode',
-    modelName: 'Episode',
+    timestamps: false,
   }
 );
-Episode.belongsToMany(Character, { through: EpisodeCharacter });
-
 export default Episode;
