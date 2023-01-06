@@ -2,14 +2,14 @@ import express, { ErrorRequestHandler, Express, Request, Response } from 'expres
 import cors from 'cors';
 import 'dotenv/config';
 import fileUpload from 'express-fileupload';
-import router from './api/routers/index.js';
-import characterRouter from './api/routers/character.router.js';
-import episodeRouter from './api/routers/episode.router.js';
-import locationRouter from './api/routers/location.router.js';
-import db from './models/index.js';
-import characterDbController from './db-controllers/character-controller.js';
-import episodeDbController from './db-controllers/episode-controller.js';
-import { characters, episodes } from './temp-data/index.js';
+import router from './routers/index.js';
+import characterRouter from './routers/character.router.js';
+import episodeRouter from './routers/episode.router.js';
+import locationRouter from './routers/location.router.js';
+import db from '../database/models/index.js';
+import characterDbController from '../database/controllers/character-controller.js';
+import episodeDbController from '../database/controllers/episode-controller.js';
+import { characters, episodes } from '../temp-data/index.js';
 
 const app: Express = express();
 const port = process.env.PORT || 1337;

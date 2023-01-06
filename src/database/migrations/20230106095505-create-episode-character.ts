@@ -1,6 +1,6 @@
 import { DataTypes, QueryInterface } from 'sequelize';
 import EpisodeCharacter from '../models/episodecharacter.js';
-import { EpisodeCharacter as EpisodeCharacterType } from '../../types/episode-character.js';
+import { EpisodeCharacter as EpisodeCharacterType } from 'episode-character.js';
 import Episode from '../models/episode.js';
 import Character from '../models/character.js';
 

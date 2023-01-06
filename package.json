@@ -1,7 +1,7 @@
 {
   "name": "setup",
   "version": "1.0.0",
-  "main": "dist/src/index.ts",
+  "main": "index.js",
   "type": "module",
   "engines": {
     "node": "18.x"
@@ -9,9 +9,9 @@
   "scripts": {
     "clearDist": "npx rimraf dist",
     "build": "npm run clearDist && npx tsc",
-    "start": "node dist/src/index.js",
+    "start": "node dist/src/api/index.js",
     "postinstall": "tsc",
-    "dev": "nodemon src/index.ts",
+    "dev": "nodemon src/api/index.ts",
     "ts.check": "tsc --project tsconfig.json",
     "migrate-undo": "npx sequelize-cli db:migrate:undo:all",
     "migrate": "npx sequelize-cli db:migrate",

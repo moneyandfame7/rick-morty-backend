@@ -1,6 +1,6 @@
 import { DataTypes, QueryInterface } from 'sequelize';
 import Character from '../models/character.js';
-import { Character as CharacterType } from '../../types/character.js';
+import { Character as CharacterType } from 'character.js';
 
 module.exports = {
   up: async (queryInterface: QueryInterface): Promise<void> =>

@@ -1,6 +1,6 @@
 import { CreationAttributes } from 'sequelize/types/index.js';
-import { Character as CharacterType } from '../../types/character.js';
-import { Episode as EpisodeType } from '../../types/episode.js';
+import { Character as CharacterType } from 'character.js';
+import { Episode as EpisodeType } from 'episode.js';
 
 export const characters: CreationAttributes<CharacterType>[] = [
   {

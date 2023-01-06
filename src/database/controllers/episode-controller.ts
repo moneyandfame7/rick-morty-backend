@@ -1,5 +1,5 @@
 import { CreationAttributes } from 'sequelize/types/index.js';
-import { Episode as EpisodeType } from '../../types/episode.js';
+import { Episode as EpisodeType } from 'episode.js';
 import Episode from '../models/episode.js';
 import Character from '../models/character.js';
 
@@ -20,7 +20,9 @@ class EpisodeDbController {
       include: [
         {
           model: Character,
-          attributes: ['id', 'name', 'status'],
+          as: 'characters',
+          attributes: ['name', 'url'],
+          // якщо убрати це, то можна побачити проміжну таблицю
           through: {
             attributes: [],
           },
@@ -40,9 +42,10 @@ class EpisodeDbController {
       include: [
         {
           model: Character,
-          attributes: ['id', 'name', 'status'],
+          as: 'characters',
+          attributes: ['url'],
           through: {
-            attributes: [],
+            attributes: ['url'],
           },
         },
       ],

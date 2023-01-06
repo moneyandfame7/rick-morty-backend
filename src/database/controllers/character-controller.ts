@@ -20,7 +20,8 @@ class CharacterDbController {
       include: [
         {
           model: Episode,
-          attributes: ['id', 'name'],
+          as: 'episodes',
+          attributes: ['url'],
           through: {
             attributes: [],
           },
@@ -40,7 +41,8 @@ class CharacterDbController {
       include: [
         {
           model: Episode,
-          attributes: ['id', 'name'],
+          as: 'episodes',
+          attributes: ['url'],
           through: {
             attributes: [],
           },
