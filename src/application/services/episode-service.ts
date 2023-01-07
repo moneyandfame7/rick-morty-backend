@@ -1,9 +1,9 @@
 import { CreationAttributes } from 'sequelize/types/index.js';
 import { Episode as EpisodeType } from '../../types/episode.js';
-import Episode from '../models/episode.js';
-import Character from '../models/character.js';
+import Episode from '../../database/models/episode.js';
+import Character from '../../database/models/character.js';
 
-class EpisodeDbController {
+class EpisodeService {
   create = (episode: CreationAttributes<EpisodeType>) => {
     return Episode.create(episode)
       .then((episode) => {
@@ -12,6 +12,7 @@ class EpisodeDbController {
       })
       .catch((err) => {
         console.log('>> Error while creating Episode: ', err);
+        throw new Error(err);
       });
   };
 
@@ -21,19 +22,22 @@ class EpisodeDbController {
         {
           model: Character,
           as: 'characters',
-          attributes: ['name', 'url'],
+          attributes: ['url'],
+
           // якщо убрати це, то можна побачити проміжну таблицю
           through: {
             attributes: [],
           },
         },
       ],
+      nest: true,
     })
       .then((episodes) => {
         return episodes;
       })
       .catch((err) => {
         console.log('>> Error while retrieving Episodes: ', err);
+        throw new Error(err);
       });
   };
 
@@ -45,7 +49,7 @@ class EpisodeDbController {
           as: 'characters',
           attributes: ['url'],
           through: {
-            attributes: ['url'],
+            attributes: [],
           },
         },
       ],
@@ -55,6 +59,7 @@ class EpisodeDbController {
       })
       .catch((err) => {
         console.log('>> Error while finding Episode: ', err);
+        throw new Error(err);
       });
   };
 
@@ -71,16 +76,17 @@ class EpisodeDbController {
             return null;
           }
 
-          episode.addCharacter(character);
-          console.log(`>> added Character id=${character.id} to Episode id=${episode.id}`);
-          return episode;
+          episode.addCharacter(character).then(() => {
+            console.log(`>> added Character id=${character.id} to Episode id=${episode.id}`);
+            return episode;
+          });
         });
       })
       .catch((err) => {
         console.log('>> Error while adding Character to Episode: ', err);
+        throw new Error(err);
       });
   };
 }
 
-const episodeDbController = new EpisodeDbController();
-export default episodeDbController;
+export default new EpisodeService();

@@ -16,7 +16,10 @@ import { CreationOptional } from 'sequelize/types/index.js';
  * */
 export interface ResourceBases {
   readonly id: CreationOptional<number>;
+
   readonly created_at: CreationOptional<Date>;
+
   readonly name: string;
+
   readonly url: string;
 }

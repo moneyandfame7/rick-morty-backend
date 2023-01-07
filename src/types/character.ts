@@ -7,8 +7,11 @@ export interface Character
   extends Model<InferAttributes<Character>, InferCreationAttributes<Character>>,
     ResourceBases {
   status: 'Alive' | 'Dead' | 'unknown';
+
   species: string;
+
   type: string;
+
   gender: 'Male' | 'Female' | 'Genderless' | 'unknown';
   // location:string
   // origin: string;

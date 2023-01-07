@@ -1,9 +1,9 @@
-import Character from '../models/character.js';
-import { CreationAttributes } from 'sequelize/types/index.js';
-import Episode from '../models/episode.js';
+import { CreationAttributes } from 'sequelize';
+import Episode from '../../database/models/episode.js';
+import Character from '../../database/models/character.js';
 
 // TODO: зробити замість Characters інше слово для асоціації ( as )
-class CharacterDbController {
+class CharacterService {
   create = (character: CreationAttributes<Character>) => {
     return Character.create(character)
       .then((character) => {
@@ -12,6 +12,7 @@ class CharacterDbController {
       })
       .catch((err) => {
         console.log('>> Error while creating Character: ', err);
+        throw new Error(err);
       });
   };
 
@@ -33,6 +34,7 @@ class CharacterDbController {
       })
       .catch((err) => {
         console.log('>> Error while retrieving Characters: ', err);
+        throw new Error(err);
       });
   };
 
@@ -54,10 +56,11 @@ class CharacterDbController {
       })
       .catch((err) => {
         console.log('>> Error while finding Character: ', err);
+        throw new Error(err);
       });
   };
+
+  addEpisode = (characterid: number, episodeId: number) => {};
 }
 
-const characterDbController = new CharacterDbController();
-
-export default characterDbController;
+export default new CharacterService();
