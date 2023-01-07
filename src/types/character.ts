@@ -6,10 +6,10 @@ import { BelongsToManyAddAssociationsMixin, BelongsToManySetAssociationsMixin } 
 export interface Character
   extends Model<InferAttributes<Character>, InferCreationAttributes<Character>>,
     ResourceBases {
-  status: 'Alive' | 'Dead' | 'unknown';
+  status: string;
   species: string;
   type: string;
-  gender: 'Male' | 'Female' | 'Genderless' | 'unknown';
+  gender: string;
   // location:string
   // origin: string;
   // Episodes: NonAttribute<Episode[]>;

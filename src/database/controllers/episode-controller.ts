@@ -62,12 +62,12 @@ class EpisodeDbController {
     return Episode.findByPk(episodeId)
       .then((episode) => {
         if (!episode) {
-          console.log('Episode not found!');
+          console.log('**Episode not found!**');
           return null;
         }
         return Character.findByPk(characterId).then((character) => {
           if (!character) {
-            console.log('Character not found!');
+            console.log('**Character not found!**');
             return null;
           }
 
@@ -78,6 +78,17 @@ class EpisodeDbController {
       })
       .catch((err) => {
         console.log('>> Error while adding Character to Episode: ', err);
+      });
+  };
+
+  createMany = (array: CreationAttributes<EpisodeType>[]) => {
+    return Episode.bulkCreate<EpisodeType>(array)
+      .then((episode) => {
+        console.log('>> Created many episodes << ');
+        return episode;
+      })
+      .catch((err) => {
+        console.log('>> Error while creating many episodes: ', err);
       });
   };
 }

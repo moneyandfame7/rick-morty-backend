@@ -57,12 +57,12 @@ const Character = db.define<Character>(
 ! а не просто Model.tableName
 */
 Character.belongsToMany(Episode, {
-  through: EpisodeCharacter,
+  through: { model: EpisodeCharacter, unique: false },
   as: 'episodes',
 });
 
 Episode.belongsToMany(Character, {
-  through: EpisodeCharacter,
+  through: { model: EpisodeCharacter, unique: false },
   as: 'characters',
 });
 
