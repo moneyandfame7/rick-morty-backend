@@ -4,13 +4,13 @@ import { QueryInterface } from 'sequelize';
 import { CreationAttributes } from 'sequelize/types/index.js';
 import { Episode as EpisodeType } from '../../types/episode.js';
 import Episode from '../models/episode.js';
-import { fetchData } from '../../utils/fetch-data.js';
+// import { fetchData } from '../../utils/fetch-data.js';
 
 export default {
   up: async (queryInterface: QueryInterface): Promise<void> =>
     await queryInterface.sequelize.transaction(async (transaction) => {
       try {
-        const responseEpisode = await fetchData('https://rickandmortyapi.com/api/episode');
+        // const responseEpisode = await fetchData('https://rickandmortyapi.com/api/episode');
 
         const episodesObj: CreationAttributes<EpisodeType>[] = [
           {

@@ -1,9 +1,6 @@
-import dotenv from 'dotenv';
 import { Options } from 'sequelize';
 
-dotenv.config();
-
-interface IConfigTs {
+export interface IConfigTs {
   development: Options;
   test: Options;
   production: Options;
@@ -16,11 +13,6 @@ const configDB: IConfigTs = {
     database: 'rick-morty',
     host: 'localhost',
     port: 5432,
-    // username: 'postgres',
-    // password: 'WeOfaeYfp6AfcGmILvV8',
-    // database: 'railway',
-    // host: 'containers-us-west-76.railway.app',
-    // port: 6954,
     dialect: 'postgres',
     dialectOptions: {
       charset: 'utf8',
@@ -31,10 +23,11 @@ const configDB: IConfigTs = {
     logging: false,
   },
   test: {
-    username: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    host: process.env.DB_HOST,
+    username: 'postgres',
+    password: 'root',
+    database: 'rick-morty',
+    host: 'localhost',
+    port: 5432,
     dialect: 'postgres',
     dialectOptions: {
       charset: 'utf8',
@@ -49,7 +42,12 @@ const configDB: IConfigTs = {
     database: 'railway',
     host: 'containers-us-west-76.railway.app',
     port: 6954,
-    dialect: 'postgres',
+    // username: DatabaseConfig.DB_USER,
+    // password: DatabaseConfig.DB_PASSWORD,
+    // database: DatabaseConfig.DB_NAME,
+    // host: DatabaseConfig.DB_HOST,
+    // port: DatabaseConfig.DB_PORT,
+    // dialect: DatabaseConfig.DB_DIALECT,
     dialectOptions: {
       charset: 'utf8',
       multipleStatements: true,
