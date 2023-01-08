@@ -5,6 +5,8 @@ import fileUpload from 'express-fileupload';
 import { mainRouter } from '../application/routers/main-router.js';
 import { episodeRouter } from './routers/episode-router.js';
 import { characterRouter } from './routers/character-router.js';
+import Episode from '../database/models/episode.js';
+import Character from '../database/models/character.js';
 
 export default class ServerApplication {
   private readonly host: string = ApiServerConfig.HOST;
@@ -20,15 +22,48 @@ export default class ServerApplication {
 
     ServerApplication.app.use(fileUpload({}));
 
-    ServerApplication.app.use('/test', (req, res) => {
-      res.send('test');
-    });
-
     ServerApplication.app.use('/api', mainRouter);
 
     ServerApplication.app.use('/api', characterRouter);
 
     ServerApplication.app.use('/api', episodeRouter);
+
+    ServerApplication.app.use('/test', async (req, res) => {
+      const urls: any[] = [];
+
+      interface IEpisode {
+        id: number;
+        name: string;
+        created_at: string;
+        characters: string[];
+        air_date: string;
+      }
+
+      const episodes: any = await Episode.findAll({
+        include: [
+          {
+            model: Character,
+            as: 'characters',
+            attributes: ['url'],
+
+            // якщо убрати це, то можна побачити Episodeну таблицю
+            through: {
+              attributes: [],
+            },
+          },
+        ],
+        nest: true,
+      })
+        .then((episodes) => {
+          return episodes[0];
+        })
+        .catch((err) => {
+          console.log('>> Error while retrieving Episodes: ', err);
+          throw new Error(err);
+        });
+
+      res.send(episodes[0].characters);
+    });
   }
 
   private log() {
