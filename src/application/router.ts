@@ -10,10 +10,10 @@
 //   static locations: () => void;
 //   static error: () => void;
 // }
-//
+// !!!!! // dependency injection
 // const router = express.Router();
 // const charactersController = new CharacterController();
-// const episodesController = new EpisodeController();
+// const episod aesController = new EpisodeController();
 //
 // export class Router extends Endpoints {
 //   public static main() {}

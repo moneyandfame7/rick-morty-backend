@@ -1,4 +1,4 @@
-import { CreationAttributes } from 'sequelize';
+import sequelize, { CreationAttributes } from 'sequelize';
 import Episode from '../../database/models/episode.js';
 import Character from '../../database/models/character.js';
 
@@ -18,16 +18,22 @@ class CharacterService {
 
   findAll = () => {
     return Character.findAll({
+      attributes: {
+        include: [[sequelize.col('episodes.url'), 'first_seen_in']],
+      },
+
+      // todo добавлять строку уже к усществующей таблице возможно но тогда єто хуйня будет ккаято
+      // подивиться міксини, мб там щось є
       include: [
         {
           model: Episode,
           as: 'episodes',
           attributes: ['url'],
-          through: {
-            attributes: [],
-          },
         },
       ],
+      // сортування з кінця DESC
+      // з початку ASC
+      order: [['id', 'ASC']],
     })
       .then((characters) => {
         return characters;

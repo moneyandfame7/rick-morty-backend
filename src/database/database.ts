@@ -14,13 +14,14 @@ export default class Database implements Setup {
     DatabaseConfig.configuration
   );
 
-  public connect(options?: SyncOptions) {
-    return this.db.sync({ ...options }).then(() => {
-      console.log('>> Connect to DB at: ', new Date().toLocaleTimeString());
-    });
+  public async connect(options?: SyncOptions) {
+    await this.db.sync({ ...options });
+    console.log('>> Connect to DB at: ', new Date().toLocaleTimeString());
   }
 
   public model(name: string) {
     return this.db.model(name);
   }
 }
+
+export const DataBaseInstance = new Database();

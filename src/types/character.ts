@@ -1,7 +1,7 @@
 import { BelongsToManyAddAssociationMixin, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 import { Episode } from './episode.js';
 import { ResourceBases } from './bases.js';
-import { BelongsToManyAddAssociationsMixin, BelongsToManySetAssociationsMixin } from 'sequelize/types/index.js';
+import { BelongsToManyAddAssociationsMixin, BelongsToManySetAssociationsMixin } from 'sequelize';
 // TODO : локації + оріджин + episodes
 export interface Character
   extends Model<InferAttributes<Character>, InferCreationAttributes<Character>>,
