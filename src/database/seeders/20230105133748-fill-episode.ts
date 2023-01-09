@@ -2,7 +2,7 @@
 
 import { QueryInterface } from 'sequelize';
 import { CreationAttributes } from 'sequelize/types/index.js';
-import { Episode as EpisodeType } from '../../types/episode.js';
+import { Episode as EpisodeType } from '../../types/models/episode.js';
 import Episode from '../models/episode.js';
 import { fetchData } from '../../utils/fetch-data.js';
 import { IEpisode } from '../../types/response.js';

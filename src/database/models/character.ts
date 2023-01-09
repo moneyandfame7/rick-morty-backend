@@ -1,6 +1,6 @@
 'use strict';
 import { DataTypes } from 'sequelize';
-import { Character } from '../../types/character.js';
+import { Character } from '../../types/models/character.js';
 import Episode from './episode.js';
 import EpisodeCharacter from './episodecharacter.js';
 import { DataBaseInstance } from '../database.js';

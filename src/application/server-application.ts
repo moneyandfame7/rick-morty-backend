@@ -1,5 +1,5 @@
 import ApiServerConfig from '../config/api-config.js';
-import express, { Express, NextFunction, Request, Response } from 'express';
+import express, { Express } from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
@@ -33,7 +33,13 @@ class ServerApplication {
     this.app.use('/api', mainRouter);
     this.app.use('/api', episodesRouter);
     this.app.use('/api', charactersRouter);
-
+    this.app.use((req, res) => {
+      res.send({
+        error: {
+          message: 'There is nothing here.',
+        },
+      });
+    });
     // error handler
     this.app.use(errorHandler);
   }
