@@ -1,7 +1,7 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import CharacterService from '../services/character-service.js';
 
-export default class CharacterController {
+class CharacterController {
   async create(req: Request, res: Response) {
     const body = req.body;
     if (body) {
@@ -39,3 +39,5 @@ export default class CharacterController {
     }
   }
 }
+
+export default new CharacterController();

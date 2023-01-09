@@ -1,16 +1,14 @@
 import EpisodeController from '../controllers/episode-controller.js';
 import express from 'express';
-import EpisodeService from '../services/episode-service.js';
-import CharacterService from '../services/character-service.js';
-//
-const router = express.Router();
 
-router.get('/episodes', EpisodeController.all);
+const episodes = express.Router();
 
-router.get('/episodes/:id', EpisodeController.find);
+episodes.get('/episodes', EpisodeController.all);
 
-router.get('/episodes', EpisodeController.create);
+episodes.get('/episodes/:id', EpisodeController.find);
 
-router.get('/byCharacter', EpisodeController.byCharacter);
+episodes.get('/episodes/character', (req, res) => {
+  res.send('episodes/character');
+});
 
-export { router as episodeRouter };
+export { episodes as episodeRouter };

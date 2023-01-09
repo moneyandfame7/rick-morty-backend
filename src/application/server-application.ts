@@ -7,6 +7,9 @@ import { episodeRouter } from './routers/episode-router.js';
 import { characterRouter } from './routers/character-router.js';
 import Episode from '../database/models/episode.js';
 import Character from '../database/models/character.js';
+import { homeRouter } from './routers/home-router.js';
+import CharacterController from './controllers/character-controller.js';
+import EpisodeController from './controllers/episode-controller.js';
 
 export default class ServerApplication {
   private readonly host: string = ApiServerConfig.HOST;
@@ -17,16 +20,16 @@ export default class ServerApplication {
 
   protected setup() {
     ServerApplication.app.use(cors());
-
     ServerApplication.app.use(express.json());
-
     ServerApplication.app.use(fileUpload({}));
-
-    ServerApplication.app.use('/api', mainRouter);
 
     ServerApplication.app.use('/api', characterRouter);
 
     ServerApplication.app.use('/api', episodeRouter);
+
+    ServerApplication.app.use('/api', mainRouter);
+
+    ServerApplication.app.use('/', homeRouter);
 
     ServerApplication.app.use('/test', async (req, res) => {
       const urls: any[] = [];
