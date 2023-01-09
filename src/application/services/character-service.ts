@@ -29,6 +29,9 @@ class CharacterService {
           model: Episode,
           as: 'episodes',
           attributes: ['url'],
+          through: {
+            attributes: [],
+          },
         },
       ],
       // сортування з кінця DESC

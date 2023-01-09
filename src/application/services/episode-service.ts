@@ -17,14 +17,14 @@ class EpisodeService {
     }
   };
 
-  findAllByCharacterId = async () => {
+  findAllByCharacterId = async (id: number) => {
     try {
       const episodes = await Episode.findAll({
         include: {
           model: Character,
           as: 'characters',
           where: {
-            id: 133,
+            id: id,
           },
           attributes: [],
         },
