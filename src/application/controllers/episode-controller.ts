@@ -38,9 +38,7 @@ class EpisodeController {
 
   async find(req: Request, res: Response) {
     const id = Number(req.params.id);
-    if (!id) {
-      throw new BadRequestError('Invalid ID.');
-    }
+
     const episode = await EpisodeService.findById(id);
     if (episode) {
       return res.send(episode);
@@ -48,10 +46,10 @@ class EpisodeController {
     throw new NotFoundError(`Episode with ID ${id} not found`);
   }
 
-  async byCharacter(req: Request, res: Response, next: NextFunction) {
+  async byCharacter(req: Request, res: Response) {
     const id = Number(req.query.id);
     if (!id) {
-      throw new BadRequestError('Invalid ID.');
+      throw new BadRequestError('Invalid character id.');
     }
     const episodes = await EpisodeService.findAllByCharacterId(id);
     if (episodes) {
