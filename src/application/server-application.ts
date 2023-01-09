@@ -1,72 +1,41 @@
 import ApiServerConfig from '../config/api-config.js';
-import express, { Express } from 'express';
-import cors from 'cors';
-import fileUpload from 'express-fileupload';
-import { mainRouter } from '../application/routers/main-router.js';
-import { episodeRouter } from './routers/episode-router.js';
-import { characterRouter } from './routers/character-router.js';
-import Episode from '../database/models/episode.js';
-import Character from '../database/models/character.js';
-import { homeRouter } from './routers/home-router.js';
-import CharacterController from './controllers/character-controller.js';
-import EpisodeController from './controllers/episode-controller.js';
+import express, { Express, NextFunction, Request, Response } from 'express';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import episodesRouter from './routes/episodes-router.js';
+import charactersRouter from './routes/characters-router.js';
+import { fileURLToPath } from 'url';
+import mainRouter from './routes/main-router.js';
+import errorHandler from './middlewares/error-handler.js';
 
-export default class ServerApplication {
+class ServerApplication {
+  private readonly __filename = fileURLToPath(import.meta.url);
+
+  private readonly __dirname = path.dirname(this.__filename);
+
   private readonly host: string = ApiServerConfig.HOST;
 
   private readonly port: number = ApiServerConfig.PORT;
 
-  static readonly app: Express = express();
+  private readonly app: Express = express();
 
   protected setup() {
-    ServerApplication.app.use(cors());
-    ServerApplication.app.use(express.json());
-    ServerApplication.app.use(fileUpload({}));
+    this.app.set('view engine', 'pug');
+    this.app.use(logger('dev'));
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: false }));
+    this.app.use(cookieParser());
+    this.app.use(express.static(path.join(this.__dirname, 'public')));
 
-    ServerApplication.app.use('/api', characterRouter);
+    // routers
 
-    ServerApplication.app.use('/api', episodeRouter);
+    this.app.use('/api', mainRouter);
+    this.app.use('/api', episodesRouter);
+    this.app.use('/api', charactersRouter);
 
-    ServerApplication.app.use('/api', mainRouter);
-
-    ServerApplication.app.use('/', homeRouter);
-
-    ServerApplication.app.use('/test', async (req, res) => {
-      const urls: any[] = [];
-
-      interface IEpisode {
-        id: number;
-        name: string;
-        created_at: string;
-        characters: string[];
-        air_date: string;
-      }
-
-      const episodes: any = await Episode.findAll({
-        include: [
-          {
-            model: Character,
-            as: 'characters',
-            attributes: ['url'],
-
-            // якщо убрати це, то можна побачити Episodeну таблицю
-            through: {
-              attributes: [],
-            },
-          },
-        ],
-        nest: true,
-      })
-        .then((episodes) => {
-          return episodes[0];
-        })
-        .catch((err) => {
-          console.log('>> Error while retrieving Episodes: ', err);
-          throw new Error(err);
-        });
-
-      res.send(episodes[0].characters);
-    });
+    // error handler
+    this.app.use(errorHandler);
   }
 
   private log() {
@@ -75,7 +44,9 @@ export default class ServerApplication {
 
   public async run(): Promise<void> {
     this.setup();
-    await ServerApplication.app.listen(this.port, this.host);
+    await this.app.listen(this.port, this.host);
     this.log();
   }
 }
+
+export default new ServerApplication();
