@@ -1,27 +1,18 @@
-import sequelize, { CreationAttributes } from 'sequelize';
+import sequelize, { CreationAttributes, WhereOptions } from 'sequelize';
 import Episode from '../../database/models/episode.js';
 import Character from '../../database/models/character.js';
 
-// TODO: зробити замість Characters інше слово для асоціації ( as )
 class CharacterService {
-  create = (character: CreationAttributes<Character>) => {
-    return Character.create(character)
-      .then((character) => {
-        console.log('>> Created Character: ' + JSON.stringify(character, null, 4));
-        return character;
-      })
-      .catch((err) => {
-        console.log('>> Error while creating Character: ', err);
-        throw new Error(err);
-      });
-  };
+  async create(character: CreationAttributes<Character>) {
+    return await Character.create(character);
+  }
 
-  findAll = () => {
-    return Character.findAll({
+  async findAll(options?: WhereOptions) {
+    return await Character.findAll({
       attributes: {
         include: [[sequelize.col('episodes.url'), 'first_seen_in']],
       },
-
+      ...options,
       // todo добавлять строку уже к усществующей таблице возможно но тогда єто хуйня будет ккаято
       // подивиться міксини, мб там щось є
       include: [
@@ -37,18 +28,11 @@ class CharacterService {
       // сортування з кінця DESC
       // з початку ASC
       order: [['id', 'ASC']],
-    })
-      .then((characters) => {
-        return characters;
-      })
-      .catch((err) => {
-        console.log('>> Error while retrieving Characters: ', err);
-        throw new Error(err);
-      });
-  };
+    });
+  }
 
-  findById = (id: number) => {
-    return Character.findByPk(id, {
+  async findById(id: number) {
+    return await Character.findByPk(id, {
       include: [
         {
           model: Episode,
@@ -59,17 +43,8 @@ class CharacterService {
           },
         },
       ],
-    })
-      .then((character) => {
-        return character;
-      })
-      .catch((err) => {
-        console.log('>> Error while finding Character: ', err);
-        throw new Error(err);
-      });
-  };
-
-  addEpisode = (characterid: number, episodeId: number) => {};
+    });
+  }
 }
 
 export default new CharacterService();
