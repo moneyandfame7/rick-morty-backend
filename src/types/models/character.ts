@@ -1,7 +1,11 @@
 import { BelongsToManyAddAssociationMixin, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 import { Episode } from './episode.js';
 import { ResourceBases } from './bases.js';
-import { BelongsToManyAddAssociationsMixin, BelongsToManySetAssociationsMixin } from 'sequelize/types/index.js';
+import {
+  BelongsToManyAddAssociationsMixin,
+  BelongsToManySetAssociationsMixin,
+  NonAttribute,
+} from 'sequelize/types/index.js';
 // TODO : локації + оріджин + episodes
 export interface Character
   extends Model<InferAttributes<Character>, InferCreationAttributes<Character>>,
@@ -14,6 +18,8 @@ export interface Character
   // origin: string;
   // Episodes: NonAttribute<Episode[]>;
   image: string;
+
+  episodes: NonAttribute<Episode[]>;
 
   // add one
   addEpisode: BelongsToManyAddAssociationMixin<Episode, number>;

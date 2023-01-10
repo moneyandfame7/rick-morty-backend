@@ -33,6 +33,7 @@ class ServerApplication {
     this.app.use('/api', mainRouter);
     this.app.use('/api', episodesRouter);
     this.app.use('/api', charactersRouter);
+
     this.app.use((req, res) => {
       res.send({
         error: {

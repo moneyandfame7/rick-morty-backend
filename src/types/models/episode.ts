@@ -1,4 +1,10 @@
-import { BelongsToManyAddAssociationsMixin, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
+import {
+  BelongsToManyAddAssociationsMixin,
+  InferAttributes,
+  InferCreationAttributes,
+  Model,
+  NonAttribute,
+} from 'sequelize';
 import { ResourceBases } from './bases.js';
 import { BelongsToManyAddAssociationMixin, BelongsToManySetAssociationsMixin } from 'sequelize/types/index.js';
 import { Character } from './character.js';
@@ -7,6 +13,7 @@ export interface Episode extends Model<InferAttributes<Episode>, InferCreationAt
   episode: string;
   air_date: string;
 
+  characters: NonAttribute<Character[]>;
   // add one
   addCharacter: BelongsToManyAddAssociationMixin<Character, number>;
   // add many
