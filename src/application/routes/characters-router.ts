@@ -5,9 +5,9 @@ import { catchError } from '../handlers/catch-error.js';
 const charactersRouter = express.Router();
 
 /* GET Characters */
-charactersRouter.get('/characters', catchError(CharacterController.all));
+charactersRouter.get('/characters', catchError(CharacterController.findAll));
 
-charactersRouter.get('/characters/:id', catchError(CharacterController.find));
+charactersRouter.get('/characters/:id', catchError(CharacterController.findById));
 
 /* POST Character */
 charactersRouter.post('/characters', catchError(CharacterController.create));

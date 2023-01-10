@@ -1,4 +1,4 @@
-import sequelize, { CreationAttributes } from 'sequelize';
+import { CreationAttributes } from 'sequelize';
 import { Episode as EpisodeType } from '../../types/models/episode.js';
 import Episode from '../../database/models/episode.js';
 import Character from '../../database/models/character.js';
@@ -17,7 +17,7 @@ class EpisodeService {
         where: {
           id: id,
         },
-        attributes: [],
+        attributes: ['id'],
       },
     });
   }
@@ -34,7 +34,7 @@ class EpisodeService {
           },
         },
       ],
-      nest: true,
+      nest: false,
     });
   }
 

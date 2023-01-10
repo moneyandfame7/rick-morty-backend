@@ -31,7 +31,7 @@ const Episode = DataBaseInstance.db.define<Episode>(
     created_at: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: new Date(),
+      defaultValue: new Date().toLocaleString(),
     },
   },
   {
