@@ -1,18 +1,26 @@
 'use strict';
 import { DataTypes } from 'sequelize';
-import { EpisodeCharacter } from '../../types/models/episode-character.js';
-import { DataBaseInstance } from '../database.js';
+import { EpisodeCharacter as EpisodeCharacterType } from '../../types/models/episode-character.js';
+import db from './index.js';
 
-const EpisodeCharacter = DataBaseInstance.db.define<EpisodeCharacter>(
+const EpisodeCharacter = db.define<EpisodeCharacterType>(
   'EpisodeCharacter',
   {
     CharacterId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: 'Characters',
+        key: 'id',
+      },
     },
     EpisodeId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: 'Episodes',
+        key: 'id',
+      },
     },
   },
   {

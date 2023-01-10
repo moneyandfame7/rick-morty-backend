@@ -1,5 +1,7 @@
 import {
   BelongsToManyAddAssociationsMixin,
+  BelongsToManyRemoveAssociationMixin,
+  BelongsToManyRemoveAssociationsMixin,
   InferAttributes,
   InferCreationAttributes,
   Model,
@@ -20,6 +22,10 @@ export interface Episode extends Model<InferAttributes<Episode>, InferCreationAt
   addCharacters: BelongsToManyAddAssociationsMixin<Character, number>;
   //set many
   setCharacters: BelongsToManySetAssociationsMixin<Character, number>;
+  // remove one
+  removeCharacter: BelongsToManyRemoveAssociationMixin<Character, number>;
+  // remove many
+  removeCharacters: BelongsToManyRemoveAssociationsMixin<Character, number>;
 
   // TODO тут мають бути посилання на персонажів
   // Characters: NonAttribute<Character[]>;

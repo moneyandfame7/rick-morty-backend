@@ -1,6 +1,4 @@
 export abstract class CustomError extends Error {
-  public abstract readonly statusCode: number;
-
   protected constructor(message: string) {
     super(message);
   }
@@ -9,8 +7,6 @@ export abstract class CustomError extends Error {
 }
 
 export class BadRequestError extends CustomError {
-  statusCode = 400;
-
   constructor(public message: string) {
     super(message);
   }
@@ -21,8 +17,6 @@ export class BadRequestError extends CustomError {
 }
 
 export class InternalError extends CustomError {
-  statusCode = 500;
-
   constructor(public message: string) {
     super(message);
   }
@@ -33,8 +27,6 @@ export class InternalError extends CustomError {
 }
 
 export class NotFoundError extends CustomError {
-  statusCode = 404;
-
   constructor(public message: string) {
     super(message);
   }

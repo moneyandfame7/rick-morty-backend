@@ -1,9 +1,9 @@
 'use strict';
 import { DataTypes } from 'sequelize';
-import { Episode } from '../../types/models/episode.js';
-import { DataBaseInstance } from '../database.js';
+import { Episode as EpisodeType } from '../../types/models/episode.js';
+import db from './index.js';
 
-const Episode = DataBaseInstance.db.define<Episode>(
+const Episode = db.define<EpisodeType>(
   'Episode',
   {
     id: {
@@ -11,6 +11,7 @@ const Episode = DataBaseInstance.db.define<Episode>(
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
+      unique: true,
     },
     name: {
       type: DataTypes.STRING,
@@ -20,22 +21,24 @@ const Episode = DataBaseInstance.db.define<Episode>(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    url: {
+    air_date: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    air_date: {
+    url: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     created_at: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: new Date().toLocaleString(),
+      defaultValue: new Date(),
     },
   },
   {
     timestamps: false,
+    tableName: 'Episodes',
+    modelName: 'Episode',
   }
 );
 

@@ -31,11 +31,11 @@
 // })();
 
 import ServerApplication from './server-application.js';
-import { DataBaseInstance } from '../database/database.js';
+import db from '../database/models/index.js';
 
 async function runApplication() {
-  await DataBaseInstance.connect();
-  ServerApplication.run();
+  await db.sync({ force: true });
+  await ServerApplication.run();
 }
 
 (async (): Promise<void> => {

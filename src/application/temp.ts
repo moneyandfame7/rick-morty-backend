@@ -1,5 +1,9 @@
-interface IEpisodeObj {
-  id: number;
+import { CreationAttributes } from 'sequelize';
+import { Character as CharacterType } from '../types/models/character.js';
+import { Episode as EpisodeType } from '../types/models/episode.js';
+
+export interface IEpisodeObj {
+  id?: number;
   name: string;
   air_date: string;
   episode: string;
@@ -68,3 +72,63 @@ const characterObj: ICharacterObj[] = [];
 // }
 // const __episodes = await episodeDbController.findAll();
 // res.send(__episodes);
+
+export const tempCharacters: CreationAttributes<CharacterType>[] = [
+  {
+    name: 'Rick Sanchez',
+    status: 'Alive',
+    species: 'Human',
+    type: '',
+    gender: 'Male',
+    image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+    url: 'https://rickandmortyapi.com/api/character/1',
+    created_at: new Date(),
+  },
+  {
+    name: 'Mr. Goldenfold',
+    status: 'Alive',
+    species: 'Cronenberg',
+    type: '',
+    gender: 'Male',
+    image: 'https://rickandmortyapi.com/api/character/avatar/239.jpeg',
+    url: 'https://rickandmortyapi.com/api/character/239',
+    created_at: new Date(),
+  },
+  {
+    name: 'Bill',
+    status: 'Alive',
+    species: 'Human',
+    type: '',
+    gender: 'Male',
+    image: 'https://rickandmortyapi.com/api/character/avatar/45.jpeg',
+    url: 'https://rickandmortyapi.com/api/character/45',
+    created_at: new Date(),
+  },
+  {
+    name: 'Morty Smith',
+    status: 'Alive',
+    species: 'Human',
+    type: '',
+    gender: 'Male',
+    image: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg',
+    url: 'https://rickandmortyapi.com/api/character/2',
+    created_at: new Date(),
+  },
+];
+
+export const tempEpisodes: CreationAttributes<EpisodeType>[] = [
+  {
+    name: 'Pilot',
+    air_date: 'December 2, 2013',
+    episode: 'S01E01',
+    url: 'https://rickandmortyapi.com/api/episode/1',
+    created_at: new Date(),
+  },
+  {
+    name: 'Lawnmower Dog',
+    air_date: 'December 9, 2013',
+    episode: 'S01E02',
+    url: 'https://rickandmortyapi.com/api/episode/2',
+    created_at: new Date(),
+  },
+];

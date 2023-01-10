@@ -1,11 +1,11 @@
 'use strict';
 import { DataTypes } from 'sequelize';
-import { Character } from '../../types/models/character.js';
+import { Character as CharacterType } from '../../types/models/character.js';
+import db from './index.js';
 import Episode from './episode.js';
 import EpisodeCharacter from './episodecharacter.js';
-import { DataBaseInstance } from '../database.js';
 
-const Character = DataBaseInstance.db.define<Character>(
+const Character = db.define<CharacterType>(
   'Character',
   {
     id: {
@@ -13,6 +13,7 @@ const Character = DataBaseInstance.db.define<Character>(
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
+      unique: true,
     },
     status: {
       type: DataTypes.STRING,
@@ -26,15 +27,15 @@ const Character = DataBaseInstance.db.define<Character>(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    url: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     gender: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     type: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    url: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -45,10 +46,14 @@ const Character = DataBaseInstance.db.define<Character>(
     created_at: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: new Date().toLocaleString(),
+      defaultValue: new Date(),
     },
   },
-  { timestamps: false }
+  {
+    timestamps: false,
+    tableName: 'Characters',
+    modelName: 'Character',
+  }
 );
 
 /*
@@ -59,11 +64,11 @@ const Character = DataBaseInstance.db.define<Character>(
 Character.belongsToMany(Episode, {
   through: { model: EpisodeCharacter, unique: false },
   as: 'episodes',
+  constraints: false,
 });
-
 Episode.belongsToMany(Character, {
   through: { model: EpisodeCharacter, unique: false },
   as: 'characters',
+  constraints: false,
 });
-
 export default Character;

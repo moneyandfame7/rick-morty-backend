@@ -10,13 +10,7 @@ class CharacterService {
   }
 
   async findAll(options?: WhereOptions) {
-    return await Character.findAll({
-      attributes: {
-        include: [[sequelize.col('episodes.url'), 'first_seen_in']],
-      },
-      ...options,
-      // todo добавлять строку уже к усществующей таблице возможно но тогда єто хуйня будет ккаято
-      // подивиться міксини, мб там щось є
+    return Character.findAll({
       include: [
         {
           model: Episode,
@@ -27,10 +21,33 @@ class CharacterService {
           },
         },
       ],
-      // сортування з кінця DESC
-      // з початку ASC
-      order: [['id', 'ASC']],
-    });
+    })
+      .then((characters) => {
+        return characters;
+      })
+      .catch((err) => {
+        console.log('>> Error while retrieving Characters: ', err);
+      });
+    // return await Character.findAll({
+    //   // attributes: {
+    //   //   include: [[sequelize.col('episodes.url'), 'first_seen_in']],
+    //   // },
+    //   ...options,
+    //   // подивиться міксини, мб там щось є
+    //   include: [
+    //     {
+    //       model: Episode,
+    //       as: 'episodes',
+    //       attributes: ['url'],
+    //       through: {
+    //         attributes: [],
+    //       },
+    //     },
+    //   ],
+    //   // сортування з кінця DESC
+    //   // з початку ASC
+    //   order: [['id', 'ASC']],
+    // });
   }
 
   async findById(id: number) {

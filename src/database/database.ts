@@ -16,7 +16,7 @@ export default class Database implements Setup {
 
   public async connect(options?: SyncOptions) {
     await this.db.sync({ ...options });
-    console.log('>> Connect to DB at: ', new Date().toLocaleString());
+    console.log('>> Connect to DB at: ', new Date());
   }
 
   public model(name: string) {
