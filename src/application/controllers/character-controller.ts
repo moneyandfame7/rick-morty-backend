@@ -34,13 +34,14 @@ class CharacterController {
     const data = await CharacterService.findAll(options);
 
     if (data) {
+      console.log(data);
       res.send(data);
     } else {
       throw new NotFoundError('Characters not found');
     }
   }
 
-  public async byEpisode(req: Request, res: Response) {
+  public async findByEpisode(req: Request, res: Response) {
     const id = Number(req.query.id);
     if (!id) {
       throw new BadRequestError('Invalid character id.');

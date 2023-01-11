@@ -29,7 +29,7 @@ export default {
             url: episode.url,
           });
         });
-        await Episode.bulkCreate(episodesObj, { transaction });
+        await Episode.bulkCreate(episodesObj);
 
         console.log(' >> Episodes was filled successfully! ');
       } catch (error) {
@@ -40,7 +40,7 @@ export default {
   down: async (queryInterface: QueryInterface): Promise<void> =>
     queryInterface.sequelize.transaction(async (transaction) => {
       try {
-        await queryInterface.bulkDelete('Episodes', {}, { transaction });
+        await queryInterface.bulkDelete('Episodes', {});
       } catch (e) {
         console.log(e);
       }

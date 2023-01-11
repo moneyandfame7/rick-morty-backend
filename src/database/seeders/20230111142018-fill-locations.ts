@@ -25,7 +25,7 @@ export default {
             created_at: new Date(),
           });
         });
-        await Location.bulkCreate(locationsObj, { transaction });
+        await Location.bulkCreate(locationsObj);
 
         console.log(' >> Locations was filled successfully! ');
       } catch (error) {
@@ -36,7 +36,7 @@ export default {
   down: async (queryInterface: QueryInterface): Promise<void> =>
     queryInterface.sequelize.transaction(async (transaction) => {
       try {
-        await queryInterface.bulkDelete('Locations', {}, { transaction });
+        await queryInterface.bulkDelete('Locations', {});
       } catch (e) {
         console.log(e);
       }

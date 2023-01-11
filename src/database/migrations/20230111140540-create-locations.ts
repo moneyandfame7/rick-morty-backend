@@ -4,43 +4,39 @@ import { Location as LocationType } from '../../types/models/location.js';
 module.exports = {
   up: async (queryInterface: QueryInterface): Promise<void> =>
     await queryInterface.sequelize.transaction(async (transaction) => {
-      await queryInterface.createTable<LocationType>(
-        'Locations',
-        {
-          id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            primaryKey: true,
-            autoIncrement: true,
-            unique: true,
-          },
-          name: {
-            type: DataTypes.STRING,
-            allowNull: false,
-          },
-          type: {
-            type: DataTypes.STRING,
-            allowNull: false,
-          },
-          dimension: {
-            type: DataTypes.STRING,
-            allowNull: false,
-          },
-          created_at: {
-            type: DataTypes.DATE,
-            allowNull: false,
-            defaultValue: new Date(),
-          },
+      await queryInterface.createTable<LocationType>('Locations', {
+        id: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+          primaryKey: true,
+          autoIncrement: true,
+          unique: true,
         },
-        { transaction }
-      );
+        name: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        type: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        dimension: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        created_at: {
+          type: DataTypes.DATE,
+          allowNull: false,
+          defaultValue: new Date(),
+        },
+      });
 
       console.log('>> Table «Locations» was created successfully <<');
     }),
 
   down: async (queryInterface: QueryInterface): Promise<void> =>
     await queryInterface.sequelize.transaction(async (transaction) => {
-      await queryInterface.dropTable('Locations', { transaction, cascade: true });
+      await queryInterface.dropTable('Locations', { cascade: true });
       console.log('>> Table «Locations» was dropped successfully <<');
     }),
 };

@@ -11,7 +11,7 @@ export default {
     await queryInterface.sequelize.transaction(async (transaction) => {
       try {
         const responseEpisode = await fetchData<IEpisode>('https://rickandmortyapi.com/api/episode');
-        const _episodes = await Episode.findAll({ transaction });
+        const _episodes = await Episode.findAll();
         for (let i = 0; i < responseEpisode.length; i++) {
           for (let j = 0; j < responseEpisode[i].characters.length; j++) {
             const characterId = getIdFromUrl(responseEpisode[i].characters[j]);
@@ -27,7 +27,7 @@ export default {
   down: async (queryInterface: QueryInterface): Promise<void> =>
     queryInterface.sequelize.transaction(async (transaction) => {
       try {
-        await queryInterface.bulkDelete('CharacterEpisodes', {}, { transaction });
+        await queryInterface.bulkDelete('CharacterEpisodes', {});
       } catch (e) {
         console.log(e);
       }

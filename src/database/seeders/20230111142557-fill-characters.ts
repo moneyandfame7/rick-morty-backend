@@ -39,7 +39,7 @@ export default {
           });
         });
 
-        await Character.bulkCreate(characterObj, { transaction });
+        await Character.bulkCreate(characterObj);
         console.log('>> Characters was filled successfully!');
       } catch (error) {
         console.log('>> Error while filled characters', error);
@@ -49,7 +49,7 @@ export default {
   down: async (queryInterface: QueryInterface): Promise<void> =>
     queryInterface.sequelize.transaction(async (transaction) => {
       try {
-        await queryInterface.bulkDelete('Characters', {}, { transaction });
+        await queryInterface.bulkDelete('Characters', {});
       } catch (e) {
         console.log(e);
       }

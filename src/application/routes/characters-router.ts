@@ -9,7 +9,7 @@ charactersRouter.get('/characters', CharacterController.findAll);
 
 charactersRouter.get('/characters/:id', catchError(CharacterController.findById));
 
-charactersRouter.get('/characters/episodes', CharacterController.byEpisode);
+charactersRouter.get('/characters/episodes', CharacterController.findByEpisode);
 
 /* POST Character */
 charactersRouter.post('/characters', catchError(CharacterController.create));

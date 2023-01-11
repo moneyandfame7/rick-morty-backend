@@ -13,7 +13,7 @@ class LocationController {
     throw new BadRequestError('Data cannot be empty');
   }
 
-  async all(req: Request, res: Response) {
+  async findAll(req: Request, res: Response) {
     const locations = await LocationService.findAll();
     if (locations) {
       return res.send(locations);
@@ -21,7 +21,7 @@ class LocationController {
     throw new NotFoundError('Locations not found');
   }
 
-  async find(req: Request, res: Response) {
+  async findById(req: Request, res: Response) {
     const id = Number(req.params.id);
 
     const location = await LocationService.findById(id);
@@ -31,7 +31,7 @@ class LocationController {
     throw new NotFoundError(`Location with ID ${id} not found`);
   }
 
-  async byCharacter(req: Request, res: Response) {
+  async findByCharacter(req: Request, res: Response) {
     const id = Number(req.query.id);
     if (!id) {
       throw new BadRequestError('Invalid character id.');
