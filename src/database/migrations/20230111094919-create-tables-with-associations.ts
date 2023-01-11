@@ -3,7 +3,6 @@ import { Character as CharacterType } from '../../types/models/character.js';
 import { Episode as EpisodeType } from '../../types/models/episode.js';
 import { Location as LocationType } from '../../types/models/location.js';
 import { CharacterEpisode as CharacterEpisodeType } from '../../types/models/character-episode.js';
-import { CharacterLocation as CharacterLocationType } from '../../types/models/character-location.js';
 
 module.exports = {
   up: async (queryInterface: QueryInterface): Promise<void> =>
@@ -44,6 +43,22 @@ module.exports = {
           type: DataTypes.STRING,
           allowNull: false,
           defaultValue: new Date(),
+        },
+        LocationId: {
+          type: DataTypes.INTEGER,
+          allowNull: true,
+          references: {
+            model: 'Locations',
+            key: 'id',
+          },
+        },
+        OriginId: {
+          type: DataTypes.INTEGER,
+          allowNull: true,
+          references: {
+            model: 'Locations',
+            key: 'id',
+          },
         },
       });
       await queryInterface.createTable<EpisodeType>('Episodes', {
@@ -104,35 +119,11 @@ module.exports = {
         createdAt: { type: DataTypes.DATE, allowNull: false, defaultValue: new Date() },
         updatedAt: { type: DataTypes.DATE, allowNull: false, defaultValue: new Date() },
       });
-      // зроибити це одразу в персонажі, і в локації теж додати поле residents maybe
-      await queryInterface.addColumn('Characters', 'LocationId', {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        references: {
-          model: 'Locations',
-          key: 'id',
-        },
-      });
-      await queryInterface.addColumn('Characters', 'OriginId', {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        references: {
-          model: 'Locations',
-          key: 'id',
-        },
-      });
-      // await queryInterface.createTable<CharacterLocationType>('CharacterLocations', {
-      //   CharacterId: { type: DataTypes.INTEGER, allowNull: false, references: { model: 'Characters', key: 'id' } },
-      //   LocationId: { type: DataTypes.INTEGER, allowNull: false, references: { model: 'Locations', key: 'id' } },
-      //   createdAt: { type: DataTypes.DATE, allowNull: false, defaultValue: new Date() },
-      //   updatedAt: { type: DataTypes.DATE, allowNull: false, defaultValue: new Date() },
-      // });
     }),
 
   down: async (queryInterface: QueryInterface): Promise<void> =>
     await queryInterface.sequelize.transaction(async (transaction) => {
       await queryInterface.dropTable('CharacterEpisodes');
-      // await queryInterface.dropTable('CharacterLocations');
       await queryInterface.dropTable('Characters');
       await queryInterface.dropTable('Episodes');
       await queryInterface.dropTable('Locations');
