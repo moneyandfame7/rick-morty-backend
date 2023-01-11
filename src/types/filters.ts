@@ -15,4 +15,10 @@ interface EpisodeFilters {
   characters: Array<string> | string;
 }
 
-export type PossibleOptions = BasicFilters & CharactersFilters & EpisodeFilters;
+interface LocationFilters {
+  type: string;
+  dimension: string;
+  residents: Array<string> | string;
+}
+
+export type PossibleOptions = BasicFilters & CharactersFilters & EpisodeFilters & LocationFilters;
