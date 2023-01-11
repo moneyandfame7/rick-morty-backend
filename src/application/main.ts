@@ -36,7 +36,7 @@ import { DataBaseInstance } from '../database/database.js';
 async function runApplication() {
   await DataBaseInstance.connect();
 
-  ServerApplication.run();
+  await ServerApplication.run();
 }
 
 (async (): Promise<void> => {

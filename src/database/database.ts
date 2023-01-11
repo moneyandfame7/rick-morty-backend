@@ -18,10 +18,6 @@ export default class Database implements Setup {
     await this.db.sync({ ...options });
     console.log('>> Connect to DB at: ', new Date().toLocaleString());
   }
-
-  public model(name: string) {
-    return this.db.model(name);
-  }
 }
 
 export const DataBaseInstance = new Database();
