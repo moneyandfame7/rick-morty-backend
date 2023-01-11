@@ -1,10 +1,10 @@
 'use strict';
 import { DataTypes } from 'sequelize';
-import { Episode as EpisodeType } from '../../types/models/episode.js';
+import { Location as LocationType } from '../../types/models/location.js';
 import db from './index.js';
 
-const Episode = db.define<EpisodeType>(
-  'Episode',
+const Location = db.define<LocationType>(
+  'Location',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -12,15 +12,15 @@ const Episode = db.define<EpisodeType>(
       autoIncrement: true,
       primaryKey: true,
     },
+    type: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    episode: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    air_date: {
+    dimension: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -32,9 +32,9 @@ const Episode = db.define<EpisodeType>(
   },
   {
     timestamps: false,
-    tableName: 'Episodes',
-    modelName: 'Episode',
+    tableName: 'Locations',
+    modelName: 'Location',
   }
 );
 
-export default Episode;
+export default Location;

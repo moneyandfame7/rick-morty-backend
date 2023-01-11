@@ -1,3 +1,16 @@
+interface IEntity {
+  id: number;
+  name: string;
+  created: string;
+  url: string;
+}
+
+export interface ILocation extends IEntity {
+  type: string;
+  dimension: string;
+  residents: string[];
+}
+
 export interface ICharacter extends IEntity {
   episode: Array<string>;
   gender: string;
@@ -7,7 +20,6 @@ export interface ICharacter extends IEntity {
     name: string;
     url: string;
   };
-  url: string;
   origin: {
     name: string;
     url: string;
@@ -24,14 +36,9 @@ export interface IResponse {
     prev: string | null;
   };
 }
-interface IEntity {
-  id: number;
-  name: string;
-  created: string;
-}
+
 export interface IEpisode extends IEntity {
   air_date: string;
   episode: string;
   characters: string[];
-  url: string;
 }

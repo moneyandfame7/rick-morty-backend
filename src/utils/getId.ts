@@ -4,4 +4,5 @@
  *  https://website.com/123 >> 123
  */
 
-export const getIdFromUrl = (url: string): number => parseInt(url.split('/')[url.split('/').length - 1]);
+export const getIdFromUrl = (url: string): number | undefined =>
+  url.length ? parseInt(url.split('/')[url.split('/').length - 1]) : undefined;

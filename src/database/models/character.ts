@@ -1,11 +1,12 @@
 'use strict';
 import { DataTypes } from 'sequelize';
-import { Character } from '../../types/models/character.js';
+import { Character as CharacterType } from '../../types/models/character.js';
+import db from './index.js';
 import Episode from './episode.js';
-import EpisodeCharacter from './episodecharacter.js';
-import { DataBaseInstance } from '../database.js';
+import CharacterEpisode from './character-episode.js';
+import Location from './location.js';
 
-const Character = DataBaseInstance.db.define<Character>(
+const Character = db.define<CharacterType>(
   'Character',
   {
     id: {
@@ -13,11 +14,14 @@ const Character = DataBaseInstance.db.define<Character>(
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
+      unique: true,
     },
     status: {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    OriginId: { type: DataTypes.INTEGER, allowNull: true },
+    LocationId: { type: DataTypes.INTEGER, allowNull: true },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -34,10 +38,6 @@ const Character = DataBaseInstance.db.define<Character>(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    url: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     image: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -45,10 +45,14 @@ const Character = DataBaseInstance.db.define<Character>(
     created_at: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: new Date().toLocaleString(),
+      defaultValue: new Date(),
     },
   },
-  { timestamps: false }
+  {
+    timestamps: false,
+    tableName: 'Characters',
+    modelName: 'Character',
+  }
 );
 
 /*
@@ -57,13 +61,28 @@ const Character = DataBaseInstance.db.define<Character>(
 ! а не просто Model.tableName
 */
 Character.belongsToMany(Episode, {
-  through: { model: EpisodeCharacter, unique: false },
+  through: { model: CharacterEpisode, unique: false },
   as: 'episodes',
+  constraints: false,
 });
-
 Episode.belongsToMany(Character, {
-  through: { model: EpisodeCharacter, unique: false },
+  through: { model: CharacterEpisode, unique: false },
   as: 'characters',
+  constraints: false,
 });
 
+Character.belongsTo(Location, {
+  foreignKey: 'LocationId',
+  as: 'location',
+  constraints: false,
+});
+Character.belongsTo(Location, {
+  foreignKey: 'OriginId',
+  as: 'origin',
+  constraints: false,
+});
+Location.hasMany(Character, {
+  as: 'residents',
+  constraints: false,
+});
 export default Character;

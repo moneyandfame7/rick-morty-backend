@@ -8,7 +8,9 @@ import charactersRouter from './routes/characters-router.js';
 import { fileURLToPath } from 'url';
 import mainRouter from './routes/main-router.js';
 import errorHandler from './middlewares/error-handler.js';
+import locationsRouter from './routes/locations-router.js';
 
+// TODO: зробити фільтрацію в локаціях так само як в персонажах
 class ServerApplication {
   private readonly __filename = fileURLToPath(import.meta.url);
 
@@ -33,6 +35,7 @@ class ServerApplication {
     this.app.use('/api', mainRouter);
     this.app.use('/api', episodesRouter);
     this.app.use('/api', charactersRouter);
+    this.app.use('/api', locationsRouter);
 
     this.app.use((req, res) => {
       res.send({

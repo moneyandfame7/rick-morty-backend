@@ -1,8 +1,9 @@
-import sequelize, { WhereOptions } from 'sequelize';
+import { WhereOptions } from 'sequelize';
 import Episode from '../../database/models/episode.js';
 import { Character as CharacterType } from '../../types/models/character.js';
 import Character from '../../database/models/character.js';
 import { MakeNullishOptional } from 'sequelize/types/utils.js';
+import Location from '../../database/models/location.js';
 
 class CharacterService {
   async create(character: MakeNullishOptional<CharacterType['_creationAttributes']>) {
@@ -10,27 +11,53 @@ class CharacterService {
   }
 
   async findAll(options?: WhereOptions) {
-    return await Character.findAll({
-      attributes: {
-        include: [[sequelize.col('episodes.url'), 'first_seen_in']],
-      },
+    return Character.findAll({
       ...options,
-      // todo добавлять строку уже к усществующей таблице возможно но тогда єто хуйня будет ккаято
-      // подивиться міксини, мб там щось є
       include: [
         {
           model: Episode,
           as: 'episodes',
-          attributes: ['url'],
+          attributes: ['name'],
           through: {
             attributes: [],
           },
         },
+        {
+          model: Location,
+          as: 'origin',
+        },
+        {
+          model: Location,
+          as: 'location',
+        },
       ],
-      // сортування з кінця DESC
-      // з початку ASC
-      order: [['id', 'ASC']],
-    });
+    })
+      .then((characters) => {
+        return characters;
+      })
+      .catch((err) => {
+        console.log('>> Error while retrieving Characters: ', err);
+      });
+    // return await Character.findAll({
+    //   // attributes: {
+    //   //   include: [[sequelize.col('episodes.url'), 'first_seen_in']],
+    //   // },
+    //   ...options,
+    //   // подивиться міксини, мб там щось є
+    //   include: [
+    //     {
+    //       model: Episode,
+    //       as: 'episodes',
+    //       attributes: ['url'],
+    //       through: {
+    //         attributes: [],
+    //       },
+    //     },
+    //   ],
+    //   // сортування з кінця DESC
+    //   // з початку ASC
+    //   order: [['id', 'ASC']],
+    // });
   }
 
   async findById(id: number) {
@@ -39,12 +66,25 @@ class CharacterService {
         {
           model: Episode,
           as: 'episodes',
-          attributes: ['url'],
+          attributes: ['name'],
           through: {
             attributes: [],
           },
         },
       ],
+    });
+  }
+
+  async findAllByEpisode(id: number) {
+    return await Character.findAll({
+      include: {
+        model: Episode,
+        as: 'episodes',
+        where: {
+          id: id,
+        },
+        attributes: ['id'],
+      },
     });
   }
 }

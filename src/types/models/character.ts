@@ -1,4 +1,10 @@
-import { BelongsToManyAddAssociationMixin, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
+import {
+  BelongsToManyAddAssociationMixin,
+  ForeignKey,
+  InferAttributes,
+  InferCreationAttributes,
+  Model,
+} from 'sequelize';
 import { Episode } from './episode.js';
 import { ResourceBases } from './bases.js';
 import {
@@ -6,7 +12,8 @@ import {
   BelongsToManySetAssociationsMixin,
   NonAttribute,
 } from 'sequelize/types/index.js';
-// TODO : локації + оріджин + episodes
+import { Location } from './location.js';
+
 export interface Character
   extends Model<InferAttributes<Character>, InferCreationAttributes<Character>>,
     ResourceBases {
@@ -18,7 +25,8 @@ export interface Character
   // origin: string;
   // Episodes: NonAttribute<Episode[]>;
   image: string;
-
+  LocationId: ForeignKey<Location['id']>;
+  OriginId: ForeignKey<Location['id']>;
   episodes: NonAttribute<Episode[]>;
 
   // add one
