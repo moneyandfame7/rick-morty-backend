@@ -20,6 +20,4 @@ export interface ResourceBases {
   readonly created_at: CreationOptional<Date>;
 
   readonly name: string;
-
-  readonly url: string;
 }

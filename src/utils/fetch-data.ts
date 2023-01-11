@@ -1,6 +1,6 @@
 import { fillArray } from './fill-array.js';
 import axios from 'axios';
-import fetch, { Response } from 'node-fetch';
+import fetch from 'cross-fetch';
 
 export const fetchData = async <T>(url: string): Promise<Array<T>> => {
   const response = await axios.get(url);
@@ -19,7 +19,7 @@ export const fetchData = async <T>(url: string): Promise<Array<T>> => {
  * */
 export const makeConcurrentRequest = async <T>(url: string[]): Promise<any> => {
   try {
-    return await Promise.all(url.map((res) => fetch(res).then((res) => res.json())));
+    return await Promise.all(url.map((res) => fetch(res).then((res: any) => res.json())));
   } catch (e: any) {
     console.log('<< ERROR ON FETCH DATA', e);
   }

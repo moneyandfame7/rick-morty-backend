@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import CharacterService from '../services/character-service.js';
 import { BadRequestError, InternalError, NotFoundError } from '../api-error.js';
 import filterData from '../../utils/generate-options.js';
+import EpisodeService from '../services/episode-service.js';
 
 class CharacterController {
   public async create(req: Request, res: Response) {
@@ -38,6 +39,18 @@ class CharacterController {
     } else {
       throw new NotFoundError('Characters not found');
     }
+  }
+
+  async byEpisode(req: Request, res: Response) {
+    const id = Number(req.query.id);
+    if (!id) {
+      throw new BadRequestError('Invalid character id.');
+    }
+    const characters = await CharacterService.findAllByEpisode(id);
+    if (characters) {
+      return res.send(characters);
+    }
+    throw new NotFoundError('No characters with this episode id is not found');
   }
 }
 

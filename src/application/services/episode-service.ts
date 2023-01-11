@@ -28,7 +28,7 @@ class EpisodeService {
         {
           model: Character,
           as: 'characters',
-          attributes: ['url'],
+          attributes: ['name'],
           through: {
             attributes: [],
           },
@@ -44,7 +44,7 @@ class EpisodeService {
         {
           model: Character,
           as: 'characters',
-          attributes: ['url'],
+          attributes: ['name'],
           through: {
             attributes: [],
           },
@@ -53,13 +53,50 @@ class EpisodeService {
     });
   }
 
-  async addCharacter(episodeId: number, characterId: number) {
-    const episode = await Episode.findByPk(episodeId);
-    const character = await Character.findByPk(characterId);
-    if (episode && character) {
-      await episode.addCharacter(character);
-    }
-    throw new InternalError('Episode or character not found.');
+  async addCharacter(episodeId: number | undefined, characterId: number | undefined) {
+    return Episode.findByPk(episodeId)
+      .then((episode) => {
+        if (!episode) {
+          console.log('**Episode not found!**');
+          return null;
+        }
+        return Character.findByPk(characterId).then((character) => {
+          if (!character) {
+            console.log('**Character not found!**');
+            return null;
+          }
+
+          episode.addCharacter(character);
+          console.log(`>> added Character id=${character.id} to Episode id=${episode.id}`);
+          return episode;
+        });
+      })
+      .catch((err) => {
+        console.log('>> Error while adding Character to Episode: ', err);
+      });
+  }
+
+  async removeCharacter(episodeId: number, characterId: number) {
+    return Episode.findByPk(episodeId)
+      .then((episode) => {
+        if (!episode) {
+          console.log('**Episode not found!**');
+          return null;
+        }
+        return Character.findByPk(characterId).then((character) => {
+          if (!character) {
+            console.log('**Character not found!**');
+            return null;
+          }
+
+          episode.removeCharacter(character);
+          console.log(`>> removed Character id=${character.id} from Episode id=${episode.id}`);
+          return episode;
+        });
+      })
+      .catch((err) => {
+        console.log('>> Error while adding Character to Episode: ', err);
+      });
   }
 }
 
