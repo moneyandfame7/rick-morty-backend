@@ -7,11 +7,7 @@ import {
 } from 'sequelize';
 import { Episode } from './episode.js';
 import { ResourceBases } from './bases.js';
-import {
-  BelongsToManyAddAssociationsMixin,
-  BelongsToManySetAssociationsMixin,
-  NonAttribute,
-} from 'sequelize/types/index.js';
+import { BelongsToManyAddAssociationsMixin, BelongsToManySetAssociationsMixin, NonAttribute } from 'sequelize';
 import { Location } from './location.js';
 
 export interface Character
@@ -21,11 +17,11 @@ export interface Character
   species: string;
   type: string;
   gender: string;
-  // location:string
-  // origin: string;
-  // Episodes: NonAttribute<Episode[]>;
   image: string;
+
+  // id location
   LocationId: ForeignKey<Location['id']>;
+  // id origin
   OriginId: ForeignKey<Location['id']>;
   episodes: NonAttribute<Episode[]>;
 
