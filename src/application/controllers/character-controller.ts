@@ -34,7 +34,6 @@ class CharacterController {
     const data = await CharacterService.findAll(options);
 
     if (data) {
-      console.log(data);
       res.send(data);
     } else {
       throw new NotFoundError('Characters not found');
