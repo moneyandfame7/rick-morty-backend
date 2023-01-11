@@ -34,10 +34,13 @@ module.exports = {
         },
         { transaction }
       );
+
+      console.log('>> Table «Locations» was created successfully <<');
     }),
 
   down: async (queryInterface: QueryInterface): Promise<void> =>
     await queryInterface.sequelize.transaction(async (transaction) => {
       await queryInterface.dropTable('Locations', { transaction, cascade: true });
+      console.log('>> Table «Locations» was dropped successfully <<');
     }),
 };

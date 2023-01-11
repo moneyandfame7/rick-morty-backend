@@ -1,12 +1,8 @@
 'use strict';
 import { QueryInterface } from 'sequelize';
-import { fetchData } from '../../utils/fetch-data.js';
-import { ICharacter, IEpisode, ILocation } from '../../types/response.js';
-import Character from '../models/character.js';
 import Episode from '../models/episode.js';
-import { getIdFromUrl } from '../../utils/getId.js';
-import EpisodeService from '../../application/services/episode-service.js';
-import Location from '../models/location.js';
+import { IEpisode } from '../../types/response.js';
+import { fetchData } from '../../utils/fetch-data.js';
 
 interface IEpisodeObj {
   name: string;
@@ -34,6 +30,8 @@ export default {
           });
         });
         await Episode.bulkCreate(episodesObj, { transaction });
+
+        console.log(' >> Episodes was filled successfully! ');
       } catch (error) {
         console.log('>> Error while filled episodes', error);
       }

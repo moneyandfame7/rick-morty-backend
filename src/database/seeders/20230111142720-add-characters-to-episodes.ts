@@ -1,12 +1,10 @@
 'use strict';
 import { QueryInterface } from 'sequelize';
-import { fetchData } from '../../utils/fetch-data.js';
-import { ICharacter, IEpisode, ILocation } from '../../types/response.js';
-import Character from '../models/character.js';
 import Episode from '../models/episode.js';
-import { getIdFromUrl } from '../../utils/getId.js';
 import EpisodeService from '../../application/services/episode-service.js';
-import Location from '../models/location.js';
+import { IEpisode } from '../../types/response.js';
+import { fetchData } from '../../utils/fetch-data.js';
+import { getIdFromUrl } from '../../utils/getId.js';
 
 export default {
   up: async (queryInterface: QueryInterface): Promise<void> =>
@@ -20,6 +18,7 @@ export default {
             await EpisodeService.addCharacter(_episodes[i].id, characterId);
           }
         }
+        console.log('>> Associations was created successfully!');
       } catch (error) {
         console.log('>> Error while added characters to episode', error);
       }
