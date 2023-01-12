@@ -15,7 +15,6 @@ class EpisodeController {
 
   async findById(req: Request, res: Response) {
     const id = Number(req.params.id);
-
     const episode = await EpisodeService.findById(id);
     if (episode) {
       return res.send(episode);

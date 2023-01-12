@@ -23,7 +23,7 @@ export interface Character
   LocationId: ForeignKey<Location['id']>;
   // id origin
   OriginId: ForeignKey<Location['id']>;
-  episodes: NonAttribute<Episode[]>;
+  episodes: NonAttribute<Episode[]> | NonAttribute<string[]>;
 
   // add one
   addEpisode: BelongsToManyAddAssociationMixin<Episode, number>;

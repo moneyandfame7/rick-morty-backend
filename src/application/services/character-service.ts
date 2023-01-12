@@ -62,6 +62,9 @@ class CharacterService {
 
   async findById(id: number) {
     return await Character.findByPk(id, {
+      attributes: {
+        exclude: ['OriginId', 'LocationId'],
+      },
       include: [
         {
           model: Episode,

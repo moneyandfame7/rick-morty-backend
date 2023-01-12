@@ -14,7 +14,6 @@ import { Character } from '../../types/models/character.js';
 
 const { get } = pkg;
 
-
 class CharacterController {
   public async create(req: Request, res: Response) {
     console.log(req.body, 'body');
