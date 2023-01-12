@@ -3,16 +3,42 @@ import CharacterService from '../services/character-service.js';
 import { BadRequestError, InternalError, NotFoundError } from '../api-error.js';
 import filterData from '../../utils/generate-options.js';
 import EpisodeService from '../services/episode-service.js';
+import { GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
+import pkg from 'env-var';
+import { getIdFromUrl } from '../../utils/getId.js';
+import S3Bucket from '../../config/s3-config.js';
+import sharp from 'sharp';
+import { CreationAttributes } from 'sequelize';
+import { Character } from '../../types/models/character.js';
+
+const { get } = pkg;
 
 class CharacterController {
   public async create(req: Request, res: Response) {
-    const body = req.body;
-    if (body) {
-      const character = await CharacterService.create(body);
-      if (character) return res.send(character);
-      throw new InternalError('Oops! Error while creating character');
-    }
-    throw new BadRequestError('Data cannot be empty.');
+    console.log(req.body, 'body');
+    console.log(req.file, 'file');
+    const fileBuffer = await sharp(req.file!.buffer).resize({ height: 300, width: 300, fit: 'cover' }).toBuffer();
+    const params = {
+      Bucket: S3Bucket.bucketName,
+      Key: req.file!.originalname,
+      Body: fileBuffer,
+      ContentType: req.file!.mimetype,
+    };
+    const command = new PutObjectCommand(params);
+    await S3Bucket.s3.send(command);
+    const charAttributes: CreationAttributes<Character> = {
+      name: req.body.name || 'New Character',
+      status: req.body.status || 'Alive',
+      species: req.body.species || 'Human',
+      type: req.body.type || ' ',
+      gender: req.body.gender || 'Male',
+      image: req.file!.originalname,
+      created_at: new Date(),
+    };
+    // Baby Mouse Skin Morty
+    const character = await CharacterService.create(charAttributes);
+    res.send(character);
   }
 
   public async findById(req: Request, res: Response) {
@@ -21,21 +47,38 @@ class CharacterController {
     if (!id) {
       throw new BadRequestError('Invalid ID.');
     }
-    const data = await CharacterService.findById(id);
-    if (!data) {
+
+    const character = await CharacterService.findById(id);
+
+    if (!character) {
       throw new NotFoundError(`Character with ID ${id} not found`);
     }
-    return res.send(data);
+    const getObjectParams = {
+      Bucket: get('BUCKET_NAME').default('rick-morty-images').asString(),
+      Key: character.id + '.jpeg',
+    };
+    const command = new GetObjectCommand(getObjectParams);
+    const url = await getSignedUrl(S3Bucket.s3, command, { expiresIn: 3600 });
+    character.image = url;
+    return res.send(character);
   }
 
   public async findAll(req: Request, res: Response) {
     const options = filterData(req.query as any, 'Character');
     console.log(options);
+    const characters = await CharacterService.findAll(options);
 
-    const data = await CharacterService.findAll(options);
-
-    if (data) {
-      res.send(data);
+    if (characters) {
+      for (const character of characters) {
+        const getObjectParams = {
+          Bucket: get('BUCKET_NAME').default('rick-morty-images').asString(),
+          Key: character.id + '.jpeg',
+        };
+        const command = new GetObjectCommand(getObjectParams);
+        const url = await getSignedUrl(S3Bucket.s3, command, { expiresIn: 3600 });
+        character.image = url;
+      }
+      res.send(characters);
     } else {
       throw new NotFoundError('Characters not found');
     }

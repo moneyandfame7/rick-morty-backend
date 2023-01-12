@@ -9,6 +9,14 @@ import { fileURLToPath } from 'url';
 import mainRouter from './routes/main-router.js';
 import errorHandler from './middlewares/error-handler.js';
 import locationsRouter from './routes/locations-router.js';
+import cors from 'cors';
+import { S3Client, PutObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
+import dotenv from 'dotenv';
+import sharp from 'sharp';
+import CharacterService from './services/character-service.js';
+import { CreationAttributes } from 'sequelize';
+import { Character } from '../types/models/character.js';
+import S3Bucket from '../config/s3-config.js';
 
 // TODO: зробити фільтрацію в локаціях так само як в персонажах
 class ServerApplication {
@@ -29,6 +37,9 @@ class ServerApplication {
     this.app.use(express.urlencoded({ extended: false }));
     this.app.use(cookieParser());
     this.app.use(express.static(path.join(this.__dirname, 'public')));
+    this.app.use(cors());
+
+    dotenv.config();
 
     // routers
 
