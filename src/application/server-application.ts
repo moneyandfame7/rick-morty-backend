@@ -9,6 +9,14 @@ import episodesRouter from './routes/episodes-router.js';
 import charactersRouter from './routes/characters-router.js';
 import mainRouter from './routes/main-router.js';
 import locationsRouter from './routes/locations-router.js';
+import cors from 'cors';
+import { S3Client, PutObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
+import dotenv from 'dotenv';
+import sharp from 'sharp';
+import CharacterService from './services/character-service.js';
+import { CreationAttributes } from 'sequelize';
+import { Character } from '../types/models/character.js';
+import S3Bucket from '../config/s3-config.js';
 
 class ServerApplication {
   private readonly __filename = fileURLToPath(import.meta.url);
@@ -28,6 +36,9 @@ class ServerApplication {
     this.app.use(express.urlencoded({ extended: false }));
     this.app.use(cookieParser());
     this.app.use(express.static(path.join(this.__dirname, 'public')));
+    this.app.use(cors());
+
+    dotenv.config();
 
     /* routes */
     this.app.use('/api', mainRouter);
