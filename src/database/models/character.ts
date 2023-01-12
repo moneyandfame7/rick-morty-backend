@@ -16,21 +16,19 @@ const Character = db.define<CharacterType>(
       primaryKey: true,
       unique: true,
     },
-    status: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    OriginId: { type: DataTypes.INTEGER, allowNull: true },
-    LocationId: { type: DataTypes.INTEGER, allowNull: true },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    species: {
+    gender: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    gender: {
+    status: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    species: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -42,6 +40,9 @@ const Character = db.define<CharacterType>(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    OriginId: { type: DataTypes.INTEGER, allowNull: true },
+    LocationId: { type: DataTypes.INTEGER, allowNull: true },
+
     created_at: {
       type: DataTypes.DATE,
       allowNull: false,

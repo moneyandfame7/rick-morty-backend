@@ -2,6 +2,11 @@ import { fillArray } from './fill-array.js';
 import axios from 'axios';
 import fetch from 'cross-fetch';
 
+/**
+ * генерує url з масивом --> кількістю об'єктів і робить запит
+ * повертає масив отриманих з запиту об'єктів
+ * @example https://url.com/[1,2,3,4] >> {id: 1}, {id: 2}, {id: 3}, {id: 4}
+ **/
 export const fetchData = async <T>(url: string): Promise<Array<T>> => {
   const response = await axios.get(url);
   const countOfObjects = response.data.info.count;
@@ -15,7 +20,7 @@ export const fetchData = async <T>(url: string): Promise<Array<T>> => {
   }
 };
 /**
- * Асинхронная функция *Promise.all()*;
+ * Робить паралельний запит по всім url.
  * */
 export const makeConcurrentRequest = async <T>(url: string[]): Promise<any> => {
   try {

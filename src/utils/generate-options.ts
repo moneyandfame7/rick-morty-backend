@@ -27,5 +27,13 @@ export default function filterData(options: PossibleOptions, model: string) {
           episode: options.episode,
         }),
       };
+    case 'Location':
+      return {
+        where: _.omitBy({
+          ...basic,
+          type: options.type,
+          dimension: options.dimension,
+        }),
+      };
   }
 }

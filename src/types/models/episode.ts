@@ -7,7 +7,7 @@ import {
   NonAttribute,
 } from 'sequelize';
 import { ResourceBases } from './bases.js';
-import { BelongsToManyAddAssociationMixin, BelongsToManySetAssociationsMixin } from 'sequelize/types/index.js';
+import { BelongsToManyAddAssociationMixin, BelongsToManySetAssociationsMixin } from 'sequelize';
 import { Character } from './character.js';
 
 export interface Episode extends Model<InferAttributes<Episode>, InferCreationAttributes<Episode>>, ResourceBases {

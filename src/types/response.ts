@@ -1,3 +1,12 @@
+export interface IInfo {
+  info: {
+    count: number;
+    pages: number;
+    next: string | null;
+    prev: string | null;
+  };
+}
+
 interface IEntity {
   id: number;
   name: string;
@@ -26,15 +35,6 @@ export interface ICharacter extends IEntity {
   };
   species: string;
   status: string;
-}
-
-export interface IResponse {
-  info: {
-    count: number;
-    pages: number;
-    next: string | null;
-    prev: string | null;
-  };
 }
 
 export interface IEpisode extends IEntity {

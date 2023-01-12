@@ -14,6 +14,7 @@ import { Character } from '../../types/models/character.js';
 
 const { get } = pkg;
 
+
 class CharacterController {
   public async create(req: Request, res: Response) {
     console.log(req.body, 'body');
@@ -84,7 +85,7 @@ class CharacterController {
     }
   }
 
-  async byEpisode(req: Request, res: Response) {
+  public async findByEpisode(req: Request, res: Response) {
     const id = Number(req.query.id);
     if (!id) {
       throw new BadRequestError('Invalid character id.');
