@@ -37,7 +37,7 @@ const configDB: IConfigTs = {
     define: {
       timestamps: false,
     },
-    logging: false,
+    logging: true,
   },
   production: {
     username: `${process.env.DB_USER}`,
