@@ -58,7 +58,7 @@ class ServerApplication {
   }
 
   private log() {
-    console.log(`>> Server started >> http://${this.host}:${this.port}`);
+    console.log(`>> Server started >> http://${this.host}:${this.port}/api`);
   }
 
   public async run(): Promise<void> {

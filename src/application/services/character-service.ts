@@ -13,7 +13,24 @@ class CharacterService {
   async findAll(options?: WhereOptions) {
     return Character.findAll({
       ...options,
+      attributes: {
+        exclude: ['OriginId', 'LocationId'],
+      },
       include: [
+        {
+          model: Location,
+          as: 'origin',
+          attributes: {
+            exclude: ['created_at'],
+          },
+        },
+        {
+          model: Location,
+          as: 'location',
+          attributes: {
+            exclude: ['created_at'],
+          },
+        },
         {
           model: Episode,
           as: 'episodes',
@@ -21,14 +38,6 @@ class CharacterService {
           through: {
             attributes: [],
           },
-        },
-        {
-          model: Location,
-          as: 'origin',
-        },
-        {
-          model: Location,
-          as: 'location',
         },
       ],
     })

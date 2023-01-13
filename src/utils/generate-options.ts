@@ -1,10 +1,15 @@
 import { PossibleOptions } from '../types/filters.js';
 import _ from 'lodash';
+import { Op } from 'sequelize';
 
 export default function filterData(options: PossibleOptions, model: string) {
   const basic = {
     id: options.id,
-    name: options.name,
+    name: options.name
+      ? {
+          [Op.iLike]: `%${options.name}%`,
+        }
+      : undefined,
   };
   switch (model) {
     case 'Character':
