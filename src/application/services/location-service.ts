@@ -24,8 +24,9 @@ class LocationService {
   //   order: [['id', 'ASC']],
 
   async findAll(options?: WhereOptions) {
-    return await Location.findAll({
+    return await Location.findAndCountAll({
       ...options,
+      distinct: true, // рахує кількість без вкладених моделей
       include: [
         {
           model: Character,
@@ -33,7 +34,6 @@ class LocationService {
           attributes: ['name'],
         },
       ],
-      nest: false,
     });
   }
 

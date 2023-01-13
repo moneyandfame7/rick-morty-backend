@@ -3,6 +3,7 @@ import { Episode as EpisodeType } from '../../types/models/episode.js';
 import Episode from '../../database/models/episode.js';
 import Character from '../../database/models/character.js';
 import { InternalError } from '../api-error.js';
+import { WhereOptions } from 'sequelize/types/index.js';
 
 class EpisodeService {
   async create(episode: CreationAttributes<EpisodeType>) {
@@ -22,8 +23,9 @@ class EpisodeService {
     });
   }
 
-  async findAll() {
-    return await Episode.findAll({
+  async findAll(options?: WhereOptions) {
+    return await Episode.findAndCountAll({
+      distinct: true, // рахує кількість без вкладених моделей
       include: [
         {
           model: Character,
@@ -34,7 +36,6 @@ class EpisodeService {
           },
         },
       ],
-      nest: false,
     });
   }
 

@@ -7,5 +7,5 @@ export default class ApiServerConfig {
 
   public static readonly HOST: string = get('API-HOST').required().default('localhost').asString();
 
-  public static readonly BASE_URL: string = get('BASE_URL').required().default('http://localhost:3001/api').asString();
+  public static readonly BASE_URL: string = get('BASE_URL').required().default('http://localhost:3001').asString();
 }
