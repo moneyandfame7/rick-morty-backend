@@ -67,15 +67,15 @@ class CharacterController {
     const filters = filterData(req.query as any, 'Character');
     const characters = await CharacterService.findAll(filters);
     if (characters) {
-      for (const character of characters.rows) {
-        const getObjectParams = {
-          Bucket: get('BUCKET_NAME').default('rick-morty-images').asString(),
-          Key: character.id + '.jpeg',
-        };
-        const command = new GetObjectCommand(getObjectParams);
-        const url = await getSignedUrl(S3Bucket.s3, command, { expiresIn: 3600 });
-        character.image = url;
-      }
+      // for (const character of characters.rows) {
+      //   const getObjectParams = {
+      //     Bucket: get('BUCKET_NAME').default('rick-morty-images').asString(),
+      //     Key: character.id + '.jpeg',
+      //   };
+      //   const command = new GetObjectCommand(getObjectParams);
+      //   const url = await getSignedUrl(S3Bucket.s3, command, { expiresIn: 3600 });
+      //   character.image = url;
+      // }
       const result = pagination(
         {
           page: Number(req.query.page),

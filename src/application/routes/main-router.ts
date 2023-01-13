@@ -5,9 +5,9 @@ const mainRouter = express.Router();
 
 mainRouter.get('/', (_req, res) => {
   res.send({
-    characters: `${ApiServerConfig.BASE_URL}/api/characters`,
-    episodes: `${ApiServerConfig.BASE_URL}/api/episodes`,
-    locations: `${ApiServerConfig.BASE_URL}/api/locations`,
+    characters: `${ApiServerConfig.BASE_URL}/api/characters?page=1`,
+    episodes: `${ApiServerConfig.BASE_URL}/api/episodes?page=1`,
+    locations: `${ApiServerConfig.BASE_URL}/api/locations?page=1`,
   });
 });
 

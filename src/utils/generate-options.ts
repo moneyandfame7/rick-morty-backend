@@ -84,10 +84,11 @@ export const pagination = (options: Pagination, data: PossibleData, objectsName:
   const prev = options.page === 1 ? null : options.page - 1;
   const next = options.page === pages ? null : options.page + 1;
 
-  const queryString = (page: number) => _.replace(options.otherQuery as string, `?page=${page}`, `?page=${page}`);
+  const queryString = (newPage: number) => _.replace(options.otherQuery as string, `?page=${page}`, `?page=${newPage}`);
 
   return {
     info: {
+      current: options.page,
       count: options.count,
       pages,
       prev: prev
