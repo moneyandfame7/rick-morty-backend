@@ -6,9 +6,16 @@ const env: string = process.env.NODE_ENV || 'development';
 
 const config: Options = configDB[env as keyof typeof configDB];
 
-const db: Sequelize = new Sequelize(
-  'postgresql://postgres:WeOfaeYfp6AfcGmILvV8@containers-us-west-76.railway.app:6954/railway',
-  config
-);
+const db: Sequelize = new Sequelize('railway', 'postgres', 'WeOfaeYfp6AfcGmILvV8', {
+  host: 'containers-us-west-76.railway.app',
+  port: 6954,
+  dialect: 'postgres',
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000,
+  },
+});
 
 export default db;
