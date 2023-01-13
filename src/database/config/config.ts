@@ -38,24 +38,18 @@ const configDB: IConfigTs = {
   },
   production: {
     username: 'postgres',
-    password: 'WeOfaeYfp6AfcGmILvV8',
-    database: 'railway',
-    host: 'containers-us-west-76.railway.app',
-    port: 6954,
-    // username: DatabaseConfig.DB_USER,
-    // password: DatabaseConfig.DB_PASSWORD,
-    // database: DatabaseConfig.DB_NAME,
-    // host: DatabaseConfig.DB_HOST,
-    // port: DatabaseConfig.DB_PORT,
-    // dialect: DatabaseConfig.DB_DIALECT,
+    password: 'root',
+    database: 'rick-morty',
+    host: 'localhost',
+    port: 5432,
+    dialect: 'postgres',
     dialectOptions: {
       charset: 'utf8',
-      multipleStatements: true,
     },
-    logging: false,
     define: {
       timestamps: false,
     },
+    logging: false,
   },
 };
 export default configDB;
