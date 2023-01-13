@@ -1,6 +1,8 @@
 interface BasicFilters {
-  id: number;
+  id: number | string;
   name: string;
+  /* sort from start | end */
+  order?: 'ASC' | 'DESC';
 }
 
 interface CharactersFilters {

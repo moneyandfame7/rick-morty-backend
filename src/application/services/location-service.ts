@@ -1,4 +1,4 @@
-import { CreationAttributes } from 'sequelize';
+import { CreationAttributes, WhereOptions } from 'sequelize';
 import { Location as LocationType } from '../../types/models/location.js';
 import Character from '../../database/models/character.js';
 import Location from '../../database/models/location.js';
@@ -21,8 +21,11 @@ class LocationService {
     });
   }
 
-  async findAll() {
+  //   order: [['id', 'ASC']],
+
+  async findAll(options?: WhereOptions) {
     return await Location.findAll({
+      ...options,
       include: [
         {
           model: Character,
