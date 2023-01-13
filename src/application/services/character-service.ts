@@ -1,19 +1,40 @@
-import { WhereOptions } from 'sequelize';
+import { Sequelize, WhereOptions } from 'sequelize';
 import Episode from '../../database/models/episode.js';
 import { Character as CharacterType } from '../../types/models/character.js';
 import Character from '../../database/models/character.js';
-import { MakeNullishOptional } from 'sequelize/types/utils.js';
+import { MakeNullishOptional, Where } from 'sequelize/types/utils.js';
 import Location from '../../database/models/location.js';
 
-class CharacterService {
+interface Service {
+  findAll: (options?: WhereOptions) => Promise<void | { rows: CharacterType[]; count: number }>;
+}
+class CharacterService implements Service {
   async create(character: MakeNullishOptional<CharacterType['_creationAttributes']>) {
     return await Character.create(character);
   }
 
-  async findAll(options?: WhereOptions) {
-    return Character.findAll({
+  async findAll(options?: WhereOptions): Promise<void | { rows: CharacterType[]; count: number }> {
+    return Character.findAndCountAll({
       ...options,
+      distinct: true, // рахує кількість без вкладених моделей
+      attributes: {
+        exclude: ['OriginId', 'LocationId'],
+      },
       include: [
+        {
+          model: Location,
+          as: 'origin',
+          attributes: {
+            exclude: ['created_at'],
+          },
+        },
+        {
+          model: Location,
+          as: 'location',
+          attributes: {
+            exclude: ['created_at'],
+          },
+        },
         {
           model: Episode,
           as: 'episodes',
@@ -22,18 +43,10 @@ class CharacterService {
             attributes: [],
           },
         },
-        {
-          model: Location,
-          as: 'origin',
-        },
-        {
-          model: Location,
-          as: 'location',
-        },
       ],
     })
       .then((characters) => {
-        return characters;
+        if (characters.rows.length) return characters;
       })
       .catch((err) => {
         console.log('>> Error while retrieving Characters: ', err);

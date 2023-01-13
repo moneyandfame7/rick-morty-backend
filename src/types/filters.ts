@@ -1,6 +1,8 @@
 interface BasicFilters {
-  id: number;
+  id: number | string;
   name: string;
+  /* sort from start | end */
+  order?: 'ASC' | 'DESC';
 }
 
 interface CharactersFilters {
@@ -21,4 +23,12 @@ interface LocationFilters {
   residents: Array<string> | string;
 }
 
-export type PossibleOptions = BasicFilters & CharactersFilters & EpisodeFilters & LocationFilters;
+export interface Pagination {
+  otherQuery?: string;
+  limit?: number;
+  order?: string;
+  page: number;
+  count: number;
+}
+
+export type PossibleOptions = BasicFilters & CharactersFilters & EpisodeFilters & LocationFilters & Pagination;

@@ -8,7 +8,7 @@ const charactersRouter = express.Router();
 /* GET Characters */
 charactersRouter.get('/characters', catchError(CharacterController.findAll));
 
-charactersRouter.get('/characters/episode', CharacterController.findByEpisode);
+charactersRouter.get('/characters/episode', catchError(CharacterController.findByEpisode));
 
 charactersRouter.get('/characters/:id', catchError(CharacterController.findById));
 

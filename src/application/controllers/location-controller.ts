@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import LocationService from '../services/location-service.js';
 import { BadRequestError, InternalError, NotFoundError } from '../api-error.js';
+import filterData from '../../utils/generate-options.js';
 
 class LocationController {
   async create(req: Request, res: Response) {
@@ -14,7 +15,9 @@ class LocationController {
   }
 
   async findAll(req: Request, res: Response) {
-    const locations = await LocationService.findAll();
+    const options = filterData(req.query as any, 'Location');
+    console.log(req.query);
+    const locations = await LocationService.findAll(options);
     if (locations) {
       return res.send(locations);
     }
