@@ -2,7 +2,7 @@ import ServerApplication from './server-application.js';
 import db from '../database/models/index.js';
 
 async function runApplication() {
-  await db.authenticate();
+  await db.sync({ force: false });
   console.log('>> Connect to DB at: ', new Date().toLocaleString());
 
   await ServerApplication.run();
