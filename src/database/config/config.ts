@@ -52,7 +52,7 @@ const configDB: IConfigTs = {
     define: {
       timestamps: false,
     },
-    logging: false,
+    logging: true,
   },
 };
 export default configDB;
