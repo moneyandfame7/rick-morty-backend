@@ -2,10 +2,11 @@ import { Options } from 'sequelize';
 import dotenv from 'dotenv';
 
 dotenv.config();
+
 export interface IConfigTs {
   development: Options;
   test: Options;
-  production: Options;
+  production: any;
 }
 
 const configDB: IConfigTs = {
@@ -40,19 +41,14 @@ const configDB: IConfigTs = {
     logging: true,
   },
   production: {
-    username: `${process.env.DB_USER}`,
-    password: `${process.env.DB_PASSWORD}`,
-    database: `${process.env.DB_DATABASE}`,
-    host: `${process.env.DB_HOST}`,
-    port: 6954,
+    use_env_variable: 'DATABASE_URL',
     dialect: 'postgres',
     dialectOptions: {
-      charset: 'utf8',
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
     },
-    define: {
-      timestamps: false,
-    },
-    logging: true,
   },
 };
 export default configDB;
