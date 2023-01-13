@@ -88,7 +88,7 @@ class CharacterController {
       );
       res.send(result);
     } else {
-      throw new NotFoundError('Characters not found');
+      throw new NotFoundError('Characters not foundd');
     }
   }
 
