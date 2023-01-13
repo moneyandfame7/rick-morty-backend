@@ -17,7 +17,7 @@ import CharacterService from './services/character-service.js';
 import { CreationAttributes } from 'sequelize';
 import { Character } from '../types/models/character.js';
 import S3Bucket from '../config/s3-config.js';
-
+dotenv.config();
 class ServerApplication {
   private readonly __filename = fileURLToPath(import.meta.url);
 
@@ -25,7 +25,7 @@ class ServerApplication {
 
   private readonly host: string = ApiServerConfig.HOST;
 
-  private readonly port: number = ApiServerConfig.PORT;
+  private readonly port: any = process.env.PORT || 3001;
 
   private readonly app: Express = express();
 
@@ -37,8 +37,6 @@ class ServerApplication {
     this.app.use(cookieParser());
     this.app.use(express.static(path.join(this.__dirname, 'public')));
     this.app.use(cors());
-
-    dotenv.config();
 
     /* routes */
     this.app.use('/api', mainRouter);

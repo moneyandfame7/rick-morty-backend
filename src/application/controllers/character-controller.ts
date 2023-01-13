@@ -101,7 +101,7 @@ class CharacterController {
     if (characters) {
       return res.send(characters);
     }
-    throw new NotFoundError('No characters with this episode id is not found');
+    throw new NotFoundError('No characters with this episode id is not foundd');
   }
 }
 
