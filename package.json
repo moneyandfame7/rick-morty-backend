@@ -2,7 +2,6 @@
   "name": "setup",
   "version": "1.0.0",
   "main": "src/application/main.ts",
-  "type": "module",
   "engines": {
     "node": "18.x"
   },

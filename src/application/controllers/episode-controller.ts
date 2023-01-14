@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import EpisodeService from '../services/episode-service.js';
-import { BadRequestError, InternalError, NotFoundError } from '../api-error.js';
+import EpisodeService from '../services/episode-service';
+import { BadRequestError, InternalError, NotFoundError } from '../api-error';
 
 class EpisodeController {
   async create(req: Request, res: Response) {

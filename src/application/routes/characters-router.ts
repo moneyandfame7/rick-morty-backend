@@ -1,12 +1,12 @@
 import express from 'express';
-import CharacterController from '../controllers/character-controller.js';
-import { catchError } from '../handlers/catch-error.js';
-import S3Bucket from '../../config/s3-config.js';
+import CharacterController from '../controllers/character-controller';
+import { catchError } from '../handlers/catch-error';
+import S3Bucket from '../../config/s3-config';
 
 const charactersRouter = express.Router();
 
 /* GET Characters */
-charactersRouter.get('/characters', catchError(CharacterController.findAll));
+charactersRouter.get('/characters', CharacterController.findAll);
 
 charactersRouter.get('/characters/episode', catchError(CharacterController.findByEpisode));
 

@@ -1,7 +1,7 @@
 import { CreationAttributes, WhereOptions } from 'sequelize';
-import { Location as LocationType } from '../../types/models/location.js';
-import Character from '../../database/models/character.js';
-import Location from '../../database/models/location.js';
+import { Location as LocationType } from '../../types/models/location';
+import Character from '../../database/models/character';
+import Location from '../../database/models/location';
 
 class LocationService {
   async create(episode: CreationAttributes<LocationType>) {

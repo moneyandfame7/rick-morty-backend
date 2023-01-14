@@ -1,7 +1,7 @@
 import express from 'express';
-import LocationController from '../controllers/location-controller.js';
-import { catchError } from '../handlers/catch-error.js';
-import episodesRouter from './episodes-router.js';
+import LocationController from '../controllers/location-controller';
+import { catchError } from '../handlers/catch-error';
+import episodesRouter from './episodes-router';
 
 const locationsRouter = express.Router();
 

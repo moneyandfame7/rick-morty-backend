@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import LocationService from '../services/location-service.js';
-import { BadRequestError, InternalError, NotFoundError } from '../api-error.js';
-import filterData from '../../utils/generate-options.js';
+import LocationService from '../services/location-service';
+import { BadRequestError, InternalError, NotFoundError } from '../api-error';
+import filterData from '../../utils/generate-options';
 
 class LocationController {
   async create(req: Request, res: Response) {

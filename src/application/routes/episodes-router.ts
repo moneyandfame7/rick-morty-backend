@@ -1,6 +1,6 @@
 import express from 'express';
-import EpisodeController from '../controllers/episode-controller.js';
-import { catchError } from '../handlers/catch-error.js';
+import EpisodeController from '../controllers/episode-controller';
+import { catchError } from '../handlers/catch-error';
 
 const episodesRouter = express.Router({ mergeParams: true });
 

@@ -1,9 +1,9 @@
 import { CreationAttributes } from 'sequelize';
-import { Episode as EpisodeType } from '../../types/models/episode.js';
-import Episode from '../../database/models/episode.js';
-import Character from '../../database/models/character.js';
-import { InternalError } from '../api-error.js';
-import { WhereOptions } from 'sequelize/types/index.js';
+import { Episode as EpisodeType } from '../../types/models/episode';
+import Episode from '../../database/models/episode';
+import Character from '../../database/models/character';
+import { InternalError } from '../api-error';
+import { WhereOptions } from 'sequelize/types/index';
 
 class EpisodeService {
   async create(episode: CreationAttributes<EpisodeType>) {

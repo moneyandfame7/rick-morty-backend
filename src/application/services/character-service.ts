@@ -1,9 +1,9 @@
 import { Sequelize, WhereOptions } from 'sequelize';
-import Episode from '../../database/models/episode.js';
-import { Character as CharacterType } from '../../types/models/character.js';
-import Character from '../../database/models/character.js';
-import { MakeNullishOptional, Where } from 'sequelize/types/utils.js';
-import Location from '../../database/models/location.js';
+import Episode from '../../database/models/episode';
+import { Character as CharacterType } from '../../types/models/character';
+import Character from '../../database/models/character';
+import { MakeNullishOptional, Where } from 'sequelize/types/utils';
+import Location from '../../database/models/location';
 
 interface Service {
   findAll: (options?: WhereOptions) => Promise<void | { rows: CharacterType[]; count: number }>;

@@ -1,5 +1,5 @@
-import ServerApplication from './server-application.js';
-import db from '../database/models/index.js';
+import ServerApplication from './server-application';
+import db from '../database/models';
 
 async function runApplication() {
   await db.authenticate();

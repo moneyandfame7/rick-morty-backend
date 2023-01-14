@@ -1,11 +1,11 @@
-import { Pagination, PossibleOptions } from '../types/filters.js';
+import { Pagination, PossibleOptions } from '../types/filters';
 import _ from 'lodash';
 import { Op } from 'sequelize';
-import { CreationAttributes } from 'sequelize/types/index.js';
-import { Character } from '../types/models/character.js';
-import { Episode } from '../types/models/episode.js';
-import { Location } from '../types/models/location.js';
-import ApiServerConfig from '../config/api-config.js';
+import { CreationAttributes } from 'sequelize';
+import { Character } from '../types/models/character';
+import { Episode } from '../types/models/episode';
+import { Location } from '../types/models/location';
+import ApiServerConfig from '../config/api-config';
 
 interface IFilterData {
   (options: PossibleOptions, model: string): any;

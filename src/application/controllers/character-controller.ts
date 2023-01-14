@@ -1,16 +1,16 @@
 import { Request, Response } from 'express';
-import CharacterService from '../services/character-service.js';
-import { BadRequestError, InternalError, NotFoundError } from '../api-error.js';
-import filterData, { pagination } from '../../utils/generate-options.js';
-import EpisodeService from '../services/episode-service.js';
+import CharacterService from '../services/character-service';
+import { BadRequestError, InternalError, NotFoundError } from '../api-error';
+import filterData, { pagination } from '../../utils/generate-options';
+import EpisodeService from '../services/episode-service';
 import { GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import pkg from 'env-var';
-import { getIdFromUrl } from '../../utils/getId.js';
-import S3Bucket from '../../config/s3-config.js';
+import { getIdFromUrl } from '../../utils/getId';
+import S3Bucket from '../../config/s3-config';
 import sharp from 'sharp';
 import { CreationAttributes } from 'sequelize';
-import { Character } from '../../types/models/character.js';
+import { Character } from '../../types/models/character';
 
 const { get } = pkg;
 
@@ -67,15 +67,15 @@ class CharacterController {
     const filters = filterData(req.query as any, 'Character');
     const characters = await CharacterService.findAll(filters);
     if (characters) {
-      // for (const character of characters.rows) {
-      //   const getObjectParams = {
-      //     Bucket: get('BUCKET_NAME').default('rick-morty-images').asString(),
-      //     Key: character.id + '.jpeg',
-      //   };
-      //   const command = new GetObjectCommand(getObjectParams);
-      //   const url = await getSignedUrl(S3Bucket.s3, command, { expiresIn: 3600 });
-      //   character.image = url;
-      // }
+      for (const character of characters.rows) {
+        const getObjectParams = {
+          Bucket: get('BUCKET_NAME').default('rick-morty-images').asString(),
+          Key: character.id + '.jpeg',
+        };
+        const command = new GetObjectCommand(getObjectParams);
+        const url = await getSignedUrl(S3Bucket.s3, command, { expiresIn: 3600 });
+        character.image = url;
+      }
       const result = pagination(
         {
           page: Number(req.query.page),

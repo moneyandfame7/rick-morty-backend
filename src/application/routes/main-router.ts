@@ -1,5 +1,5 @@
 import express from 'express';
-import ApiServerConfig from '../../config/api-config.js';
+import ApiServerConfig from '../../config/api-config';
 
 const mainRouter = express.Router();
 
