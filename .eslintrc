@@ -9,6 +9,6 @@
   },
   "rules": {
     "@typescript-eslint/no-var-requires": 0,
-    "prefer-const": "warn",
+    "prefer-const": "warn"
   }
 }
