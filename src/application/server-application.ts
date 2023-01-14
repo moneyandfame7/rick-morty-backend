@@ -19,8 +19,6 @@ import { Character } from '../types/models/character';
 import S3Bucket from '../config/s3-config';
 dotenv.config();
 class ServerApplication {
-  private readonly host: string = ApiServerConfig.HOST;
-
   private readonly port: any = process.env.PORT || 3001;
 
   private readonly app: Express = express();
@@ -50,12 +48,12 @@ class ServerApplication {
   }
 
   private log() {
-    console.log(`>> Server started >> http://${this.host}:${this.port}/api`);
+    console.log(`>> Server started >>http://localhost:${this.port}/api`);
   }
 
   public async run(): Promise<void> {
     this.setup();
-    await this.app.listen(this.port, this.host);
+    await this.app.listen(this.port);
     this.log();
   }
 }
