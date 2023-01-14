@@ -8,7 +8,7 @@
   "scripts": {
     "clearDist": "npx rimraf dist",
     "build": "npm run clearDist && npx tsc",
-    "start": "node dist/src/application/main.js",
+    "start": "node build/src/application/main.js",
     "postinstall": "tsc",
     "dev": "nodemon src/application/main.ts",
     "ts.check": "tsc --project tsconfig.json",
