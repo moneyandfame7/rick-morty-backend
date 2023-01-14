@@ -1,0 +1,14 @@
+import express from 'express';
+import ApiServerConfig from '../../config/api-config';
+
+const mainRouter = express.Router();
+
+mainRouter.get('/', (_req, res) => {
+  res.send({
+    characters: `${ApiServerConfig.BASE_URL}/api/characters?page=1`,
+    episodes: `${ApiServerConfig.BASE_URL}/api/episodes?page=1`,
+    locations: `${ApiServerConfig.BASE_URL}/api/locations?page=1`,
+  });
+});
+
+export default mainRouter;
