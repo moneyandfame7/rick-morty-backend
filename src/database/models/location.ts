@@ -1,7 +1,7 @@
 'use strict';
 import { DataTypes } from 'sequelize';
-import { Location as LocationType } from '../../types/models/location';
-import db from './index';
+import { Location as LocationType } from '../../types/models/location.js';
+import db from './index.js';
 
 const Location = db.define<LocationType>(
   'Location',

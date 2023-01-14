@@ -1,4 +1,4 @@
-import { CreationOptional } from 'sequelize/types/index.js';
+import { CreationOptional } from 'sequelize';
 
 /**
  * Містить в собі поля, які є у всіх моделей

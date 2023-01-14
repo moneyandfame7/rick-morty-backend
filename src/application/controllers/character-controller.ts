@@ -1,16 +1,16 @@
 import { Request, Response } from 'express';
-import CharacterService from '../services/character-service';
-import { BadRequestError, InternalError, NotFoundError } from '../api-error';
-import filterData, { pagination } from '../../utils/generate-options';
-import EpisodeService from '../services/episode-service';
+import CharacterService from '../services/character-service.js';
+import { BadRequestError, InternalError, NotFoundError } from '../api-error.js';
+import filterData, { pagination } from '../../utils/generate-options.js';
+import EpisodeService from '../services/episode-service.js';
 import { GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import pkg from 'env-var';
-import { getIdFromUrl } from '../../utils/getId';
-import S3Bucket from '../../config/s3-config';
+import { getIdFromUrl } from '../../utils/getId.js';
+import S3Bucket from '../../config/s3-config.js';
 import sharp from 'sharp';
 import { CreationAttributes } from 'sequelize';
-import { Character } from '../../types/models/character';
+import { Character } from '../../types/models/character.js';
 
 const { get } = pkg;
 

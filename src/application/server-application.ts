@@ -1,10 +1,10 @@
 import express, { Express } from 'express';
 import logger from 'morgan';
-import errorHandler from './middlewares/error-handler';
-import episodesRouter from './routes/episodes-router';
-import charactersRouter from './routes/characters-router';
-import mainRouter from './routes/main-router';
-import locationsRouter from './routes/locations-router';
+import errorHandler from './middlewares/error-handler.js';
+import episodesRouter from './routes/episodes-router.js';
+import charactersRouter from './routes/characters-router.js';
+import mainRouter from './routes/main-router.js';
+import locationsRouter from './routes/locations-router.js';
 import cors from 'cors';
 import dotenv from 'dotenv';
 dotenv.config();

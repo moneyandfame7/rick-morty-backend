@@ -1,7 +1,7 @@
 'use strict';
 import { DataTypes } from 'sequelize';
-import { Episode as EpisodeType } from '../../types/models/episode';
-import db from './index';
+import { Episode as EpisodeType } from '../../types/models/episode.js';
+import db from './index.js';
 
 const Episode = db.define<EpisodeType>(
   'Episode',
