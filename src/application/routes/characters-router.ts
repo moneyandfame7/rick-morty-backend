@@ -6,7 +6,7 @@ import S3Bucket from '../../config/s3-config';
 const charactersRouter = express.Router();
 
 /* GET Characters */
-charactersRouter.get('/characters', CharacterController.findAll);
+charactersRouter.get('/characters', catchError(CharacterController.findAll));
 
 charactersRouter.get('/characters/episode', catchError(CharacterController.findByEpisode));
 
