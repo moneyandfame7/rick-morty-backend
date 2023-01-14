@@ -201,7 +201,7 @@ const profile = await prisma.profile.create({
 })
 ```
 
-##### Create a new user with a new profile
+##### Create a new user with a new profiles
 
 ```ts
 const user = await prisma.user.create({
