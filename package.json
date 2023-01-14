@@ -6,7 +6,7 @@
     "node": "18.x"
   },
   "scripts": {
-    "clearDist": "npx rimraf dist",
+    "clearDist": "npx rimraf build",
     "build": "npm run clearDist && npx tsc",
     "start": "node build/application/main.js",
     "postinstall": "tsc",
